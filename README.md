@@ -45,6 +45,8 @@ Extend your controllers with IB module:
 ```ruby
 class SuperController < UIViewController
 
+  extend IB
+
   # define attribute accessor
   attr_accessor title
 
