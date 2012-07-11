@@ -52,12 +52,12 @@ class SuperController < UIViewController
   ib_outlet :title, UILabel
 
   # define action method
-  def onclick button
-    title.text = "Clicked!!!"
+  def ontouch button
+    title.text = "Touched!!!"
   end
 
   # define ib action 
-  ib_action :onclick
+  ib_action :ontouch
 end
 ```
 
