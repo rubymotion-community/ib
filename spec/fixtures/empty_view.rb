@@ -1,0 +1,2 @@
+class EmptyView < UIView
+end
