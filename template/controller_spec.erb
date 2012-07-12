@@ -1,0 +1,8 @@
+describe "<%= controller_name %>" do
+  tests <%= controller_name %>
+
+<% options[:actions].each do |action| -%>
+  describe "#<%= action %>" do
+  end
+<% end -%>
+end

@@ -23,11 +23,19 @@ module IB
       template('../template/controller.erb', "app/controllers/#{underscore(name)}_controller.rb")
     end
 
-    # TODO Generate spec for the UI
-    # def create_spec_file
-    # end
+    def create_helper_file
+      template('../template/controller_helper.erb', "app/helpers/#{underscore(name)}_helper.rb")
+    end
+
+    def create_spec_file
+      template('../template/controller_spec.erb', "spec/controllers/#{underscore(name)}_controller_spec.rb")
+    end
 
     private
+    def controller_name
+      camelize("#{name}Controller")
+    end
+
     def underscore(string)
       string.gsub(/::/, '/').
       gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
