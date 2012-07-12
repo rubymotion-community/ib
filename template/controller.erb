@@ -1,0 +1,24 @@
+class <%= controller_name %> < UIViewController
+  extend IB
+
+  ## define accessors
+  attr_accessor <%= (options[:accessors] + options[:outlets].keys).collect{|acc| ":#{acc}"}.join(", ") %>
+
+  ## define ib outlets
+<% options[:outlets].each do |name, type| -%>
+  ib_outlet :<%= name %>, <%= type %>
+<% end -%>
+
+  ## define actions
+<% options[:actions].each do |action| -%>
+  def <%= action %>(sender)
+    # TODO Implement action here
+  end
+<% end -%>
+
+  ## define ib action 
+<% options[:actions].each do |action| -%>
+  ib_action :<%= action %>
+<% end -%>
+
+end
