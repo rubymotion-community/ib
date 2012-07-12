@@ -1,6 +1,4 @@
 require 'fileutils'
-require 'ib/version'
-require 'ib/parser'
 require 'xcodeproj'
 
 class IB::Generator
