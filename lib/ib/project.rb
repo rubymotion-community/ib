@@ -12,7 +12,7 @@ class IB::Project
     files = [Xcodeproj::Project::PBXNativeTarget::SourceFileDescription.new(stubs_path, nil, nil)]
     
 
-    Dir.glob("#{resources_path}/**/*.{png,jpg,jpeg,storyboard,xib}") do |file|
+    Dir.glob("#{resources_path}/**/*.{xcdatamodeld,png,jpg,jpeg,storyboard,xib}") do |file|
       files << Xcodeproj::Project::PBXNativeTarget::SourceFileDescription.new(Pathname.new(file), nil, nil)
     end
 
