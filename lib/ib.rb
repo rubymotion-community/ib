@@ -9,6 +9,9 @@ end
 module IB
 end
 
+require 'fileutils'
+require 'xcodeproj'
+
 require 'ib/tasks'
 require 'ib/parser'
 require 'ib/version'

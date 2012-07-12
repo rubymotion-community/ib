@@ -1,6 +1,3 @@
-require 'fileutils'
-require 'xcodeproj'
-
 class IB::Generator
   def write src, dest
     files = IB::Parser.new.find_all(src)
