@@ -1,8 +1,3 @@
-require 'fileutils'
-require 'ib/parser'
-require 'ib/generator'
-require 'xcodeproj'
-
 class IB::Project
   def write app_path = "./app", resources_path = "./resources"
     project = Xcodeproj::Project.new
