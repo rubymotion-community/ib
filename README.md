@@ -24,16 +24,15 @@ $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project'
 
 # if you use bundler
-require 'bundler/setup' 
-Bundler.setup
+require 'bundler' 
+Bundler.require
 
-# require 'ib tasks'
-require 'ib/tasks'
-
+# if you are not using bundler
+require 'rubygems'
+require 'ib'
 
 Motion::Project::App.setup do |app|
   # ...
-  app.files.unshift IB::PATH # add ib module
 end
 
 ```

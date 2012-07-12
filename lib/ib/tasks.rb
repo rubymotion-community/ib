@@ -1,5 +1,3 @@
-require "ib"
-require "ib/project"
 require "rake"
 
 desc "Generates ui.xcodeproj and open it"
