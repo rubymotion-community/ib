@@ -19,12 +19,12 @@ Or install it yourself as:
 In your Rake file:
 
 ```ruby
-# -*- coding: utf-8 -*-
-$:.unshift("/Library/RubyMotion/lib")
-require 'motion/project'
+
+$:.unshift("/Library/RubyMotion/lib")  
+require 'motion/project'  
 
 # if you use bundler
-require 'bundler/setup' 
+require 'bundler/setup'  
 Bundler.setup
 
 # require 'ib tasks'
@@ -40,26 +40,34 @@ end
 
 ## Usage
 
-Extend your controllers with IB module:
+Generate controller with folllowing command:
 
+```
+ib_controller_generator Hello --outlets=scroller:UIScrollView btn_hello:UIButton --actions say_hello --accessors data_source
+```
+
+The generated file:
+
+#### /app/controllers/hello_controller.rb
 ```ruby
-class SuperController < UIViewController
-
+class HelloController < UIViewController
   extend IB
 
-  # define attribute accessor
-  attr_accessor title
+  ## define accessors
+  attr_accessor :data_source, :view, :scroller, :htn_hello
 
-  # define ib outlet
-  ib_outlet :title, UILabel
+  ## define ib outlets
+  ib_outlet :scroller, UIScrollView
+  ib_outlet :btn_hello, UIButton
 
-  # define action method
-  def ontouch button
-    title.text = "Touched!!!"
+  ## define actions
+  def say_hello(sender)
+    # TODO Implement action here
   end
 
-  # define ib action 
-  ib_action :ontouch
+  ## define ib action 
+  ib_action :say_hello
+
 end
 ```
 
