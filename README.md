@@ -54,7 +54,7 @@ class HelloController < UIViewController
   extend IB
 
   ## define accessors
-  attr_accessor :data_source, :view, :scroller, :htn_hello
+  attr_accessor :data_source, :scroller, :htn_hello
 
   ## define ib outlets
   ib_outlet :scroller, UIScrollView
