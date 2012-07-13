@@ -39,6 +39,28 @@ end
 
 ## Usage
 
+### Manual Way
+
+extend your class with IB module
+
+```ruby
+class HelloController < UIViewController
+  extend IB
+
+  attr_accessor :title
+
+  # define ib outlet
+  ib_outlet :title, UILabel
+
+  def someAction
+  end
+
+  # define ib action
+  ib_action :someAction
+end
+```
+
+### Generators Way
 Generate controller with folllowing command:
 
 ```
