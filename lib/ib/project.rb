@@ -13,7 +13,14 @@ class IB::Project
 
     resource_exts = %W{xcdatamodeld png jpg jpeg storyboard xib lproj}
     Dir.glob("#{resources_path}/**/*.{#{resource_exts.join(",")}}") do |file|
-      resources.files.new('path' => file)
+      file = file.gsub(/^#{resources_path}\//, '')
+      if file.end_with? ".xcdatamodeld"
+        obj = resources.groups.new('isa' => 'XCVersionGroup', 'path' => file, 'sourceTree' => '<group>', 'versionGroupType' => 'wrapper.xcdatamodel')
+        file = obj.files.new('path' => file.gsub(/xcdatamodeld$/, 'xcdatamodel'), 'sourceTree' => '<group>', 'lastKnownFileType' => 'wrapper.xcdatamodel')
+        obj.attributes['currentVersion'] = file.uuid
+      else
+        resources.files.new('path' => file, 'sourceTree' => '<group>')
+      end
     end
 
     Dir.glob("#{pods_headers_path}/**/*.h") do |file|
