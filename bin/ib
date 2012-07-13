@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+require "rubygems"
+
+require "thor"
+require "thor/group"
+require 'thor/rake_compat'
+
+module IB
+  class ControllerGenerator < Thor
+    include Thor::Actions
+    include Thor::RakeCompat
+    
+    map "c" => :controller
+
+    def self.source_root
+      File.dirname(__FILE__)
+    end
+
+    desc "controller", "generate controller"
+    argument :name, :type => :string, :desc => "Name of the controller"
+    argument :controller_type, :type => :string, :desc => "Type of the controller, default: UIViewController", :default => "UIViewController"
+    class_option :outlets, :type => :hash, :default => {}, :required => false, :desc => "IBOutlets of the controller"
+    class_option :actions, :type => :array, :default => [], :required => false, :desc => "IBAtions of the controller"
+    class_option :accessors, :type => :array, :default => [], :required => false, :desc => "Accessors of the controller"
+    def controller
+      create_controller_file
+      create_helper_file
+      create_spec_file
+    end
+
+    private
+    def create_controller_file
+      template('../template/controller.erb', "app/controllers/#{underscore(name)}_controller.rb")
+    end
+
+    def create_helper_file
+      template('../template/controller_helper.erb', "app/helpers/#{underscore(name)}_helper.rb")
+    end
+
+    def create_spec_file
+      template('../template/controller_spec.erb', "spec/controllers/#{underscore(name)}_controller_spec.rb")
+    end
+
+    def controller_name
+      camelize("#{name}Controller")
+    end
+
+    def underscore(string)
+      string.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+    end
+
+    def camelize(string)
+      return string if string !~ /_/ && string =~ /[A-Z]+.*/
+      string.split('_').map{|e| e.capitalize }.join
+    end
+  end
+end
+
+IB::ControllerGenerator.start

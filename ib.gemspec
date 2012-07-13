@@ -2,8 +2,8 @@
 require File.expand_path('../lib/ib/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Yury Korolev"]
-  gem.email         = ["yury.korolev@gmail.com"]
+  gem.authors       = ["Yury Korolev", "Francis Chong"]
+  gem.email         = ["yury.korolev@gmail.com", "francis@ignition.hk"]
   gem.description   = %q{Stupid rubymotion ib outlets support}
   gem.summary       = %q{Small portion of love to interface builder with rubymotion}
   gem.homepage      = ""
@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = IB::VERSION
 
   gem.add_dependency "xcodeproj", ">= 0.2.3"
+  gem.add_dependency "thor", "~> 0.15.4"
 
   gem.add_development_dependency "rspec", ">= 2.0"
 end
