@@ -4,12 +4,17 @@ class IB::Project
     target = project.targets.new_static_library(:ios, 'ui')
 
     resources = project.groups.new('path' => resources_path, 'name' => 'Resources')
-    support   = project.groups.new('name' => 'Supporting Files')
+    support   = project.groups.new('name' => 'Supporting Files', 'path' => 'ui.xcodeproj')
     pods      = project.groups.new('name' => 'Pods')
 
-    stubs_path = "ui.xcodeproj/stubs.h"
     IB::Generator.new.write(app_path, "ui.xcodeproj")
-    support.files.new 'path' => stubs_path
+    support.files.new 'path' => 'Stubs.h', 'sourceTree' => '<group>'
+
+    path = Pathname.new("Stubs.m")
+    desc = Xcodeproj::Project::PBXNativeTarget::SourceFileDescription.new(path, nil, nil)
+    file = target.add_source_files([desc]).first
+    file.source_tree = '<group>'
+    support.files << file
 
     resource_exts = %W{xcdatamodeld png jpg jpeg storyboard xib lproj}
     Dir.glob("#{resources_path}/**/*.{#{resource_exts.join(",")}}") do |file|
@@ -36,7 +41,6 @@ class IB::Project
       file = project.add_system_framework framework
       target.frameworks_build_phases.first << file
     end
-
 
     project.save_as("ui.xcodeproj")
   end
