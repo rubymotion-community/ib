@@ -6,7 +6,7 @@ describe IB::Parser do
   it "finds outlets and actions" do
     info = IB::Parser.new.find("spec/fixtures/custom_view.rb")
     info[:class].should == [["CustomView", "UIView"]]
-    info[:outlets].should == [["greenLabel", "UIGreenLabel"], ["redLabel", "UILabel"]]
+    info[:outlets].should == [["greenLabel"], ["redLabel"]]
     info[:actions].should == [["someAction"]]
   end
 
@@ -15,6 +15,6 @@ describe IB::Parser do
   end
 
   it "finds all infos" do
-    puts IB::Parser.new.find_all("spec/fixtures").inspect
+    IB::Parser.new.find_all("spec/fixtures").should == {"spec/fixtures/custom_view.rb"=>{:class=>[["CustomView", "UIView"]], :outlets=>[["greenLabel"], ["redLabel"]], :actions=>[["someAction"]], :path=>"spec/fixtures/custom_view.rb"}, "spec/fixtures/empty_view.rb"=>{:class=>[["EmptyView", "UIView"]], :outlets=>[], :actions=>[], :path=>"spec/fixtures/empty_view.rb"}}
   end
 end

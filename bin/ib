@@ -19,7 +19,7 @@ module IB
     desc "controller", "generate controller"
     argument :name, :type => :string, :desc => "Name of the controller"
     argument :controller_type, :type => :string, :desc => "Type of the controller, default: UIViewController", :default => "UIViewController"
-    class_option :outlets, :type => :hash, :default => {}, :required => false, :desc => "IBOutlets of the controller"
+    class_option :outlets, :type => :array, :default => [], :required => false, :desc => "IBOutlets of the controller"
     class_option :actions, :type => :array, :default => [], :required => false, :desc => "IBAtions of the controller"
     class_option :accessors, :type => :array, :default => [], :required => false, :desc => "Accessors of the controller"
     def controller

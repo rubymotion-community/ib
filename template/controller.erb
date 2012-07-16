@@ -2,11 +2,16 @@ class <%= controller_name %> < <%= controller_type %>
   extend IB
 
   ## define accessors
-  attr_accessor <%= (options[:accessors] + options[:outlets].keys).collect{|acc| ":#{acc}"}.join(", ") %>
+  attr_accessor <%= (options[:accessors] + options[:outlets]).collect { |acc| ":#{acc}"}.join(", ") %>
 
   ## define ib outlets
-<% options[:outlets].each do |name, type| -%>
-  ib_outlet :<%= name %>, <%= type %>
+<% options[:outlets].each do |name| -%>
+  ib_outlet :<%= name %>
+<% end -%>
+
+  ## define ib action 
+<% options[:actions].each do |action| -%>
+  ib_action :<%= action %>
 <% end -%>
 
   ## define actions
@@ -14,11 +19,6 @@ class <%= controller_name %> < <%= controller_type %>
   def <%= action %>(sender)
     # TODO Implement action here
   end
-<% end -%>
-
-  ## define ib action 
-<% options[:actions].each do |action| -%>
-  ib_action :<%= action %>
 <% end -%>
 
 end
