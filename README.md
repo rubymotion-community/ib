@@ -84,14 +84,13 @@ class HelloController < UIViewController
   ib_outlet :scroller
   ib_outlet :btn_hello
 
+  ## define ib action 
+  ib_action :say_hello
+
   ## define actions
   def say_hello(sender)
     # TODO Implement action here
   end
-
-  ## define ib action 
-  ib_action :say_hello
-
 end
 ```
 
