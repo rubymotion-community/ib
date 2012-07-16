@@ -29,7 +29,7 @@ class IB::Parser
   end
 
   def find_outlets src
-    src.scan /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+)/
+    src.scan /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)/
   end
 
   def find_actions src

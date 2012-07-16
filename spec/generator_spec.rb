@@ -9,8 +9,8 @@ describe IB::Generator do
     stubs.should == <<-OBJC
 @interface CustomView : UIView
 
-@property IBOutlet UIGreenLabel * greenLabel;
-@property IBOutlet UILabel * redLabel;
+@property (weak) IBOutlet id greenLabel;
+@property (weak) IBOutlet id redLabel;
 
 -(IBAction) someAction:(id) sender;
 

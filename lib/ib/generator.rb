@@ -35,7 +35,7 @@ OBJC
 <<-OBJC
 @interface #{info[:class][0][0]} : #{info[:class][0][1]}
 
-#{info[:outlets].map {|name, type| "@property IBOutlet #{type} * #{name};" }.join("\n")}
+#{info[:outlets].map {|name| "@property (weak) IBOutlet id #{name[0]};" }.join("\n")}
 
 #{info[:actions].map {|action| "-(IBAction) #{action[0]}:(id) sender;" }.join("\n")}
 
