@@ -50,7 +50,8 @@ class HelloController < UIViewController
   attr_accessor :title
 
   # define ib outlet
-  ib_outlet :title, UILabel
+  ib_outlet :title, UILabel # IBOutlet UILabel * title;
+  ib_outlet :untyped_label  # IBOutlet id untyped_label;
 
   def someAction
   end
@@ -65,7 +66,7 @@ Generate controller with folllowing command:
 
 ```
 ib c Hello UIViewController \
-  --outlets scroller:UIScrollView btn_hello:UIButton \
+  --outlets scroller:UIScrollView btn_hello: \
   --actions say_hello \
   --accessors data_source
 ```
@@ -77,19 +78,17 @@ The generated file:
 class HelloController < UIViewController
   extend IB
 
-  ## define accessors
   attr_accessor :data_source, :scroller, :htn_hello
 
-  ## define ib outlets
+  ## ib outlets
   ib_outlet :scroller, UIScrollView
-  ib_outlet :btn_hello, UIButton
+  ib_outlet :btn_hello
 
-  ## define actions
   def say_hello(sender)
     # TODO Implement action here
   end
 
-  ## define ib action 
+  ## ib action
   ib_action :say_hello
 
 end
