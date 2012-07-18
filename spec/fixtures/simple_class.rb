@@ -1,2 +1,3 @@
 class SimpleClass
+
 end

@@ -1,24 +1,30 @@
 class <%= controller_name %> < <%= controller_type %>
   extend IB
 
-  ## define accessors
   attr_accessor <%= (options[:accessors] + options[:outlets].keys).collect{|acc| ":#{acc}"}.join(", ") %>
 
-  ## define ib outlets
+<% if options[:outlets].length > 0 %>
+  ## ib outlets
 <% options[:outlets].each do |name, type| -%>
+<% if type.empty? || type == "id" -%>
+  ib_outlet :<%= name %>
+<% else -%>
   ib_outlet :<%= name %>, <%= type %>
 <% end -%>
+<% end -%>
+<% end -%>
+<% if options[:actions].length > 0 %>
 
-  ## define actions
 <% options[:actions].each do |action| -%>
   def <%= action %>(sender)
     # TODO Implement action here
   end
 <% end -%>
 
-  ## define ib action 
+  ## ib actions
 <% options[:actions].each do |action| -%>
   ib_action :<%= action %>
+<% end -%>
 <% end -%>
 
 end

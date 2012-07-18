@@ -6,7 +6,7 @@ describe IB::Parser do
   it "finds outlets and actions" do
     info = IB::Parser.new.find("spec/fixtures/custom_view.rb")
     info[:class].should == [["CustomView", "UIView"]]
-    info[:outlets].should == [["greenLabel", "UIGreenLabel"], ["redLabel", "UILabel"]]
+    info[:outlets].should == [["greenLabel", "UIGreenLabel"], ["redLabel", "UILabel"], ["untyped_label", "id"]]
     info[:actions].should == [["someAction"]]
   end
 

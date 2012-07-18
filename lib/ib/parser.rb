@@ -29,7 +29,11 @@ class IB::Parser
   end
 
   def find_outlets src
-    src.scan /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+)/
+    outlets = []
+    src.scan /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/ do |groups|
+      outlets << [groups[0], groups[2] || "id"]
+    end
+    outlets
   end
 
   def find_actions src

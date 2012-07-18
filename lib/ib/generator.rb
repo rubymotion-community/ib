@@ -35,7 +35,7 @@ OBJC
 <<-OBJC
 @interface #{info[:class][0][0]} : #{info[:class][0][1]}
 
-#{info[:outlets].map {|name, type| "@property IBOutlet #{type} * #{name};" }.join("\n")}
+#{info[:outlets].map {|name, type| "@property IBOutlet #{generate_type(type)} #{name};" }.join("\n")}
 
 #{info[:actions].map {|action| "-(IBAction) #{action[0]}:(id) sender;" }.join("\n")}
 
@@ -52,5 +52,9 @@ OBJC
 @end
 OBJC
     end.join("\n" * 2)
+  end
+
+  def generate_type type
+    type == "id" ? type : "#{type} *"
   end
 end
