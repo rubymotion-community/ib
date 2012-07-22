@@ -1,4 +1,8 @@
 class IB::Parser
+  CLASS_REGEX  = /^\s*class\s+([a-zA-Z][_a-zA-Z0-9]+)\s*<\s*([a-zA-Z][_a-zA-Z0-9]+)/
+  OUTLET_REGEX = /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
+  ACTION_REGEX = /^\s+ib_action\s+:([a-zA-Z][_a-zA-Z0-9]*)/
+
   def find_all(dir)
     all = {}
     Dir.glob("#{dir}/**/*.rb") do |file|
@@ -12,11 +16,10 @@ class IB::Parser
   def find(path)
     src = File.read(path)
     info = {class: find_class(src)}
-    
+
     return false if info[:class].length == 0
 
     info[:outlets] = find_outlets(src)
-
     info[:actions] = find_actions(src)
 
     info[:path] = path
@@ -25,18 +28,18 @@ class IB::Parser
   end
 
   def find_class src
-    src.scan /^\s*class\s+([a-zA-Z][_a-zA-Z0-9]+)\s*<\s*([a-zA-Z][_a-zA-Z0-9]+)/
+    src.scan CLASS_REGEX
   end
 
   def find_outlets src
     outlets = []
-    src.scan /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/ do |groups|
+    src.scan OUTLET_REGEX do |groups|
       outlets << [groups[0], groups[2] || "id"]
     end
     outlets
   end
 
   def find_actions src
-    src.scan /^\s+ib_action\s+:([a-zA-Z][_a-zA-Z0-9]*)/
+    src.scan ACTION_REGEX
   end
 end
