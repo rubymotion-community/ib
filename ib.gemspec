@@ -4,7 +4,7 @@ require File.expand_path('../lib/ib/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Yury Korolev", "Francis Chong"]
   gem.email         = ["yury.korolev@gmail.com", "francis@ignition.hk"]
-  gem.description   = %q{Stupid rubymotion ib outlets support}
+  gem.description   = %q{Magic rubymotion ib outlets support}
   gem.summary       = %q{Small portion of love to interface builder with rubymotion}
   gem.homepage      = ""
 
