@@ -1,15 +1,15 @@
 class <%= controller_name %> < <%= controller_type %>
   extend IB
 
-  attr_accessor <%= (options[:accessors] + options[:outlets].keys).collect{|acc| ":#{acc}"}.join(", ") %>
+  attr_accessor <%= options[:accessors].collect{|acc| ":#{acc}"}.join(", ") %>
 
 <% if options[:outlets].length > 0 %>
   ## ib outlets
 <% options[:outlets].each do |name, type| -%>
 <% if type.empty? || type == "id" -%>
-  ib_outlet :<%= name %>
+  outlet_accessor :<%= name %>
 <% else -%>
-  ib_outlet :<%= name %>, <%= type %>
+  outlet_accessor :<%= name %>, <%= type %>
 <% end -%>
 <% end -%>
 <% end -%>
@@ -21,10 +21,6 @@ class <%= controller_name %> < <%= controller_type %>
   end
 <% end -%>
 
-  ## ib actions
-<% options[:actions].each do |action| -%>
-  ib_action :<%= action %>
-<% end -%>
 <% end -%>
 
 end

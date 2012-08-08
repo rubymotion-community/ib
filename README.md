@@ -47,17 +47,13 @@ extend your class with IB module
 class HelloController < UIViewController
   extend IB
 
-  attr_accessor :title
-
   # define ib outlet
-  ib_outlet :title, UILabel # IBOutlet UILabel * title;
-  ib_outlet :untyped_label  # IBOutlet id untyped_label;
-
-  def someAction
-  end
+  outlet_accessor :title, UILabel # IBOutlet UILabel * title;
+  outlet_accessor :untyped_label  # IBOutlet id untyped_label;
 
   # define ib action
-  ib_action :someAction
+  def someAction sender
+  end
 end
 ```
 
@@ -78,18 +74,15 @@ The generated file:
 class HelloController < UIViewController
   extend IB
 
-  attr_accessor :data_source, :scroller, :htn_hello
+  attr_accessor :data_source
 
   ## ib outlets
-  ib_outlet :scroller, UIScrollView
-  ib_outlet :btn_hello
+  outlet_accessor :scroller, UIScrollView
+  outlet_accessor :btn_hello
 
   def say_hello(sender)
     # TODO Implement action here
   end
-
-  ## ib action
-  ib_action :say_hello
 
 end
 ```
