@@ -12,8 +12,12 @@ describe IB::Generator do
 @property IBOutlet UIGreenLabel * greenLabel;
 @property IBOutlet UILabel * redLabel;
 @property IBOutlet id untyped_label;
+@property IBOutlet id yellowLabel;
 
 -(IBAction) someAction:(id) sender;
+-(IBAction) anotherAction:(id) sender;
+-(IBAction) actionWithComment:(id) sender;
+-(IBAction) actionWithBrackets:(id) sender;
 
 @end
 

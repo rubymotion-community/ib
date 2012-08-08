@@ -1,7 +1,9 @@
 class IB::Parser
   CLASS_REGEX  = /^\s*class\s+([a-zA-Z][_a-zA-Z0-9]+)\s*<\s*([a-zA-Z][_a-zA-Z0-9]+)/
-  OUTLET_REGEX = /^\s+ib_outlet\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
-  ACTION_REGEX = /^\s+ib_action\s+:([a-zA-Z][_a-zA-Z0-9]*)/
+  OUTLET_REGEX = /^\s+(ib_outlet|outlet_accessor)\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
+  METHOD_REF_REGEX = /^\s+(ib_action)\s+:([a-zA-Z][_a-zA-Z0-9]*)/
+  METHOD_DEF_REGEX = /^\s+(def)\s+([a-zA-Z][_a-zA-Z0-9]*)([\s(]+)([a-zA-Z][_a-zA-Z0-9]*)([\s)]*)(#.*)?$/
+  ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
 
   def find_all(dir)
     all = {}
@@ -34,12 +36,20 @@ class IB::Parser
   def find_outlets src
     outlets = []
     src.scan OUTLET_REGEX do |groups|
-      outlets << [groups[0], groups[2] || "id"]
+      outlets << [groups[1], groups[3] || "id"]
     end
     outlets
   end
 
   def find_actions src
-    src.scan ACTION_REGEX
+    actions = []
+    src.scan ACTION_REGEX do |groups|
+      if groups[0] == "def"
+        actions << [groups[1]]
+      elsif groups[6] == "ib_action"
+        actions << [groups[7]]
+      end
+    end
+    actions.uniq
   end
 end
