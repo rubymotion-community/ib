@@ -1,6 +1,7 @@
 class IB::Parser
   CLASS_REGEX  = /^\s*class\s+([a-zA-Z][_a-zA-Z0-9]+)\s*<\s*([a-zA-Z][_a-zA-Z0-9]+)/
   OUTLET_REGEX = /^\s+(ib_outlet|outlet_accessor)\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
+  OUTLET_COLLECTION_REGEX = /^\s+(ib_outlet_collection|outlet_collection_accessor)\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
   METHOD_REF_REGEX = /^\s+(ib_action)\s+:([a-zA-Z][_a-zA-Z0-9]*)/
   METHOD_DEF_REGEX = /^\s+(def)\s+([a-zA-Z][_a-zA-Z0-9]*)([\s(]+)([a-zA-Z][_a-zA-Z0-9]*)([\s)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
@@ -22,6 +23,7 @@ class IB::Parser
     return false if info[:class].length == 0
 
     info[:outlets] = find_outlets(src)
+    info[:outlet_collections] = find_outlet_collections(src)
     info[:actions] = find_actions(src)
 
     info[:path] = path
@@ -36,6 +38,14 @@ class IB::Parser
   def find_outlets src
     outlets = []
     src.scan OUTLET_REGEX do |groups|
+      outlets << [groups[1], groups[3] || "id"]
+    end
+    outlets
+  end
+
+  def find_outlet_collections src
+    outlets = []
+    src.scan OUTLET_COLLECTION_REGEX do |groups|
       outlets << [groups[1], groups[3] || "id"]
     end
     outlets

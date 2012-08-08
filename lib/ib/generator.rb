@@ -37,6 +37,8 @@ OBJC
 
 #{info[:outlets].map {|name, type| "@property IBOutlet #{generate_type(type)} #{name};" }.join("\n")}
 
+#{info[:outlet_collections].map {|name, type| "@property IBOutletCollection(#{type}) NSArray * #{name};" }.join("\n")}
+
 #{info[:actions].map {|action| "-(IBAction) #{action[0]}:(id) sender;" }.join("\n")}
 
 @end

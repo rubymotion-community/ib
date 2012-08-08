@@ -8,6 +8,13 @@ class CustomView < UIView
 
   outlet_accessor :yellowLabel
 
+  ib_outlet_collection :greenLabel,  UIGreenLabel
+  ib_outlet_collection :redLabel, "UILabel"
+
+  ib_outlet_collection :untyped_label
+
+  outlet_collection_accessor :yellowLabel
+
   ib_action :someAction
 
   def anotherAction button
