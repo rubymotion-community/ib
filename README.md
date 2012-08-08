@@ -57,6 +57,24 @@ class HelloController < UIViewController
 end
 ```
 
+**NOTE:** If you include methods and attributes from module, you can use `ib_outlet` and `ib_action` to make them visible in designer
+
+```ruby
+module TouchLogger
+  def controlTouched sender
+    puts "touched"
+  end
+end
+
+class LogController < UIViewController
+  extend IB
+
+  include TouchLogger
+
+  ib_action :controlTouched
+end
+```
+
 ### Generators Way
 Generate controller with folllowing command:
 
