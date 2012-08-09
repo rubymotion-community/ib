@@ -8,12 +8,12 @@ class CustomView < UIView
 
   outlet_accessor :yellowLabel
 
-  ib_outlet_collection :greenLabel,  UIGreenLabel
-  ib_outlet_collection :redLabel, "UILabel"
+  ib_outlet_collection :greenLabelCollection,  UIGreenLabel
+  ib_outlet_collection :redLabelCollection, "UILabel"
 
-  ib_outlet_collection :untyped_label
+  ib_outlet_collection :untyped_label_collection
 
-  outlet_collection_accessor :yellowLabel
+  outlet_collection_accessor :yellowLabelCollection
 
   ib_action :someAction
 
@@ -28,5 +28,5 @@ class CustomView < UIView
 
   def notAction with, toArgs
   end
-  
+
 end

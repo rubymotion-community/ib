@@ -44,11 +44,11 @@ class IB::Parser
   end
 
   def find_outlet_collections src
-    outlets = []
+    outlet_collections = []
     src.scan OUTLET_COLLECTION_REGEX do |groups|
-      outlets << [groups[1], groups[3] || "id"]
+      outlet_collections << [groups[1], groups[3] || "id"]
     end
-    outlets
+    outlet_collections
   end
 
   def find_actions src
