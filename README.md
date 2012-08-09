@@ -48,8 +48,8 @@ class HelloController < UIViewController
   extend IB
 
   # define ib outlet
-  outlet_accessor :title, UILabel # IBOutlet UILabel * title;
-  outlet_accessor :untyped_label  # IBOutlet id untyped_label;
+  outlet :title, UILabel # IBOutlet UILabel * title;
+  outlet :untyped_label  # IBOutlet id untyped_label;
 
   # define ib action
   def someAction sender
@@ -95,8 +95,8 @@ class HelloController < UIViewController
   attr_accessor :data_source
 
   ## ib outlets
-  outlet_accessor :scroller, UIScrollView
-  outlet_accessor :btn_hello
+  outlet :scroller, UIScrollView
+  outlet :btn_hello
 
   def say_hello(sender)
     # TODO Implement action here

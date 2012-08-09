@@ -7,9 +7,9 @@ class <%= controller_name %> < <%= controller_type %>
   ## ib outlets
 <% options[:outlets].each do |name, type| -%>
 <% if type.empty? || type == "id" -%>
-  outlet_accessor :<%= name %>
+  outlet :<%= name %>
 <% else -%>
-  outlet_accessor :<%= name %>, <%= type %>
+  outlet :<%= name %>, <%= type %>
 <% end -%>
 <% end -%>
 <% end -%>
