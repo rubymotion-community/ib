@@ -2,6 +2,8 @@
 
 rubymotion interface builder support (yes, with outlets)
 
+[**Change Log**](https://github.com/yury/ib/wiki/Change-Log)
+
 ## Installation
 
 Add this line to your application's Gemfile:
