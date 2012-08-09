@@ -54,7 +54,7 @@ class HelloController < UIViewController
   outlet :untyped_label  # @property IBOutlet id untyped_label;
   
   # define ib outlet collection
-  outlet_collection labels, UILabel # @property IBOutletCollection(UILabel) NSArray * labels;
+  outlet_collection :labels, UILabel # @property IBOutletCollection(UILabel) NSArray * labels;
 
   # define ib action
   def someAction sender
