@@ -8,6 +8,13 @@ class CustomView < UIView
 
   outlet_accessor :yellowLabel
 
+  ib_outlet_collection :greenLabelCollection,  UIGreenLabel
+  ib_outlet_collection :redLabelCollection, "UILabel"
+
+  ib_outlet_collection :untyped_label_collection
+
+  outlet_collection_accessor :yellowLabelCollection
+
   ib_action :someAction
 
   def anotherAction button
@@ -21,5 +28,5 @@ class CustomView < UIView
 
   def notAction with, toArgs
   end
-  
+
 end
