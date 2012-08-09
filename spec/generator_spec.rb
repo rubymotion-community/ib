@@ -14,6 +14,11 @@ describe IB::Generator do
 @property IBOutlet id untyped_label;
 @property IBOutlet id yellowLabel;
 
+@property IBOutletCollection(UIGreenLabel) NSArray * greenLabelCollection;
+@property IBOutletCollection(UILabel) NSArray * redLabelCollection;
+@property IBOutletCollection(id) NSArray * untyped_label_collection;
+@property IBOutletCollection(id) NSArray * yellowLabelCollection;
+
 -(IBAction) someAction:(id) sender;
 -(IBAction) anotherAction:(id) sender;
 -(IBAction) actionWithComment:(id) sender;
@@ -23,6 +28,8 @@ describe IB::Generator do
 
 
 @interface EmptyView : UIView
+
+
 
 
 
