@@ -29,4 +29,7 @@ class CustomView < UIView
   def notAction with, toArgs
   end
 
+  def actionWithoutArgs
+  end
+
 end

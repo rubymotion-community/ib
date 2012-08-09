@@ -20,9 +20,10 @@ describe IB::Generator do
 @property IBOutletCollection(id) NSArray * yellowLabelCollection;
 
 -(IBAction) someAction:(id) sender;
--(IBAction) anotherAction:(id) sender;
+-(IBAction) anotherAction:(id) button;
 -(IBAction) actionWithComment:(id) sender;
 -(IBAction) actionWithBrackets:(id) sender;
+-(IBAction) actionWithoutArgs;
 
 @end
 

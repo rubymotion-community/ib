@@ -6,9 +6,25 @@ describe IB::Parser do
   it "finds outlets and actions" do
     info = IB::Parser.new.find("spec/fixtures/custom_view.rb")
     info[:class].should == [["CustomView", "UIView"]]
-    info[:outlets].should == [["greenLabel", "UIGreenLabel"], ["redLabel", "UILabel"], ["untyped_label", "id"], ["yellowLabel", "id"]]
-    info[:outlet_collections].should == [["greenLabelCollection", "UIGreenLabel"], ["redLabelCollection", "UILabel"], ["untyped_label_collection", "id"], ["yellowLabelCollection", "id"]]
-    info[:actions].should == [["someAction"], ["anotherAction"], ["actionWithComment"], ["actionWithBrackets"]]
+    info[:outlets].should == [
+      ["greenLabel",    "UIGreenLabel"],
+      ["redLabel",      "UILabel"],
+      ["untyped_label", "id"],
+      ["yellowLabel",   "id"]
+    ]
+    info[:outlet_collections].should == [
+      ["greenLabelCollection",     "UIGreenLabel"],
+      ["redLabelCollection",       "UILabel"],
+      ["untyped_label_collection", "id"],
+      ["yellowLabelCollection",    "id"]
+    ]
+    info[:actions].should == [
+      ["someAction",         "sender"],
+      ["anotherAction",      "button"],
+      ["actionWithComment",  "sender"],
+      ["actionWithBrackets", "sender"],
+      ["actionWithoutArgs",  nil]
+    ]
   end
 
   it "detects simple classes" do

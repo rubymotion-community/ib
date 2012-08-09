@@ -1,9 +1,10 @@
 class IB::Parser
-  CLASS_REGEX  = /^\s*class\s+([a-zA-Z][_a-zA-Z0-9]+)\s*<\s*([a-zA-Z][_a-zA-Z0-9]+)/
-  OUTLET_REGEX = /^\s+(ib_)?outlet(_accessor)?\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
-  OUTLET_COLLECTION_REGEX = /^\s+(ib_)?outlet_collection(_accessor)?\s+:([a-zA-Z][_a-zA-Z0-9]*)\s*?(,\s*['"]?([a-zA-Z][_a-zA-Z0-9]+))?/
-  METHOD_REF_REGEX = /^\s+(ib_action)\s+:([a-zA-Z][_a-zA-Z0-9]*)/
-  METHOD_DEF_REGEX = /^\s+(def)\s+([a-zA-Z][_a-zA-Z0-9]*)([\s(]+)([a-zA-Z][_a-zA-Z0-9]*)([\s)]*)(#.*)?$/
+  NAME_REGEX = /[a-zA-Z][_a-zA-Z0-9]*/
+  CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})[ \t]*<[ \t]*(#{NAME_REGEX})/
+  OUTLET_REGEX = /^[ \t]+(ib_)?outlet(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
+  OUTLET_COLLECTION_REGEX = /^[ \t]+(ib_)?outlet_collection(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
+  METHOD_REF_REGEX = /^[ \t]+(ib_action)[ \t]:(#{NAME_REGEX})/
+  METHOD_DEF_REGEX = /^[ \t]+(def)[ \t](#{NAME_REGEX})([ \t(]+)?(#{NAME_REGEX})?([ \t)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
 
   def find_all(dir)
@@ -36,30 +37,26 @@ class IB::Parser
   end
 
   def find_outlets src
-    outlets = []
-    src.scan OUTLET_REGEX do |groups|
-      outlets << [groups[2], groups[4] || "id"]
+    src.scan(OUTLET_REGEX).map do |groups|
+      [groups[2], groups[4] || "id"]
     end
-    outlets
   end
 
   def find_outlet_collections src
-    outlet_collections = []
-    src.scan OUTLET_COLLECTION_REGEX do |groups|
-      outlet_collections << [groups[2], groups[4] || "id"]
+    src.scan(OUTLET_COLLECTION_REGEX).map do |groups|
+      [groups[2], groups[4] || "id"]
     end
-    outlet_collections
   end
 
   def find_actions src
-    actions = []
-    src.scan ACTION_REGEX do |groups|
+    src.scan(ACTION_REGEX).map do |groups|
       if groups[0] == "def"
-        actions << [groups[1]]
+        [groups[1], groups[3]]
       elsif groups[6] == "ib_action"
-        actions << [groups[7]]
+        [groups[7], 'sender']
+      else
+        nil
       end
-    end
-    actions.uniq
+    end.compact.uniq {|action| action[0]}
   end
 end

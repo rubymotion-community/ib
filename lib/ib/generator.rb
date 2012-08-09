@@ -39,7 +39,7 @@ OBJC
 
 #{info[:outlet_collections].map {|name, type| "@property IBOutletCollection(#{type}) NSArray * #{name};" }.join("\n")}
 
-#{info[:actions].map {|action| "-(IBAction) #{action[0]}:(id) sender;" }.join("\n")}
+#{info[:actions].map {|action| "-(IBAction) #{generate_action(action)};" }.join("\n")}
 
 @end
 OBJC
@@ -58,5 +58,9 @@ OBJC
 
   def generate_type type
     type == "id" ? type : "#{type} *"
+  end
+
+  def generate_action action
+    action[1] ? "#{action[0]}:(id) #{action[1]}" : "#{action[0]}"
   end
 end
