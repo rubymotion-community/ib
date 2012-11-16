@@ -1,7 +1,13 @@
 require 'rake'
 
-desc "Generates ui.xcodeproj and open it"
-task :design do
-  IB::Project.new.write
-  system "open ui.xcodeproj"
+namespace :ib do
+  desc "Generates ib.xcodeproj and opens it in XCode"
+  task :open => :project do
+    system "open ib.xcodeproj"
+  end
+
+  desc "Generates ib.xcodeproj"
+  task :project do
+    IB::Project.new.write
+  end
 end
