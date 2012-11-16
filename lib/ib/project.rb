@@ -4,10 +4,10 @@ class IB::Project
     target = project.targets.new_static_library(:ios, 'ui')
 
     resources = project.groups.new('path' => resources_path, 'name' => 'Resources')
-    support   = project.groups.new('name' => 'Supporting Files', 'path' => 'ui.xcodeproj')
+    support   = project.groups.new('name' => 'Supporting Files', 'path' => 'ib.xcodeproj')
     pods      = project.groups.new('name' => 'Pods')
 
-    IB::Generator.new.write(app_path, "ui.xcodeproj")
+    IB::Generator.new.write(app_path, "ib.xcodeproj")
     support.files.new 'path' => 'Stubs.h', 'sourceTree' => '<group>'
 
     path = Pathname.new("Stubs.m")
@@ -42,6 +42,6 @@ class IB::Project
       target.frameworks_build_phases.first << file
     end
 
-    project.save_as("ui.xcodeproj")
+    project.save_as("ib.xcodeproj")
   end
 end

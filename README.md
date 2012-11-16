@@ -107,7 +107,7 @@ end
 
 Run `rake design` create Storyboard or nibs (put them in resources folder) and you will be able to bind outlets and actions to your ruby code.
 
-**Note** : add ui.xcodeproj to your .gitignore
+**Note** : add ib.xcodeproj to your .gitignore
 
 # Sample app
 
