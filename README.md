@@ -2,6 +2,8 @@
 
 rubymotion interface builder support (yes, with outlets)
 
+[**Change Log**](https://github.com/yury/ib/wiki/Change-Log)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -48,8 +50,11 @@ class HelloController < UIViewController
   extend IB
 
   # define ib outlet
-  outlet :title, UILabel # IBOutlet UILabel * title;
-  outlet :untyped_label  # IBOutlet id untyped_label;
+  outlet :title, UILabel # @property IBOutlet UILabel * title;
+  outlet :untyped_label  # @property IBOutlet id untyped_label;
+  
+  # define ib outlet collection
+  outlet_collection :labels, UILabel # @property IBOutletCollection(UILabel) NSArray * labels;
 
   # define ib action
   def someAction sender
