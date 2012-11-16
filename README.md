@@ -123,7 +123,7 @@ Here is [sample app](https://github.com/yury/ibsample)
 3. run `rake ib:open` to change story board
 4. run `rake` to run app in simulator
 
-**Note** : this app is build for iOS 6.0 beta 2
+**Note** : this app is build for iOS 6.0
 
 ## Contributing
 
