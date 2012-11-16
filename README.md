@@ -110,7 +110,7 @@ class HelloController < UIViewController
 end
 ```
 
-Run `rake design` create Storyboard or nibs (put them in resources folder) and you will be able to bind outlets and actions to your ruby code.
+Run `rake ib:open` create Storyboard or nibs (put them in resources folder) and you will be able to bind outlets and actions to your ruby code.
 
 **Note** : add ib.xcodeproj to your .gitignore
 
@@ -120,7 +120,7 @@ Here is [sample app](https://github.com/yury/ibsample)
 
 1. clone it 
 2. run `bundle`
-3. run `rake design` to change story board
+3. run `rake ib:open` to change story board
 4. run `rake` to run app in simulator
 
 **Note** : this app is build for iOS 6.0 beta 2
