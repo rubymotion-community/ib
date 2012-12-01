@@ -5,6 +5,22 @@
 
 require 'ib'
 
+module Motion
+  class Config
+    def self.files
+      []
+    end
+  end
+
+  module Project
+    class App
+      def self.config
+        Motion::Config
+      end
+    end
+  end
+end
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

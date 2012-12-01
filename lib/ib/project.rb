@@ -8,11 +8,11 @@ class IB::Project
 
     support   = project.new_group("Supporting Files")
     support.path = "ib.xcodeproj"
-    
+
     pods      = project.new_group("Pods")
     pods.path = pods_headers_path
 
-    IB::Generator.new.write(app_path, "ib.xcodeproj")
+    IB::Generator.new.write(Motion::Project::App.config.files, "ib.xcodeproj")
 
     support.new_file "ib.xcodeproj/Stubs.h"
     file = support.new_file "ib.xcodeproj/Stubs.m"

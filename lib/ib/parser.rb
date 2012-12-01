@@ -7,9 +7,12 @@ class IB::Parser
   METHOD_DEF_REGEX = /^[ \t]+(def)[ \t](#{NAME_REGEX})([ \t(]+)?(#{NAME_REGEX})?([ \t)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
 
-  def find_all(dir)
+  def find_all(dir_or_files)
     all = {}
-    Dir.glob("#{dir}/**/*.rb") do |file|
+    files = dir_or_files
+    files = Dir.glob("#{dir_or_files}/**/*.rb").to_a if dir_or_files.class == String
+    
+    files.each do |file|
       if info = find(file)
         all[file] = info
       end
