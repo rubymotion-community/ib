@@ -52,13 +52,18 @@ OBJC
   end
 
   def generate_objc_impl files
-    src = files.map do |path, info|
-      <<-OBJC
+    output = ""
+    files.map do |path, infos|
+      infos.each do |info|
+        output << <<-OBJC
 @implementation #{info[:class][0][0]}
 
 @end
 OBJC
-    end.join("\n" * 2)
+        output << "\n\n"
+      end
+    end
+    output
   end
 
   def generate_type type
