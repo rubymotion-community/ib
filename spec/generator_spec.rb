@@ -37,6 +37,19 @@ describe IB::Generator do
 
 
 @end
+
+
+@interface AnotherView : EmptyView
+
+
+
+
+
+
+
+@end
+
+
 OBJC
   end
 end

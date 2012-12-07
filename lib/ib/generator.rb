@@ -31,8 +31,10 @@ OBJC
   end
 
   def generate_objc files
-    src = files.map do |path, info|
-<<-OBJC
+    output = ""
+    files.map do |path, infos|
+      infos.each do |info|
+        output << <<-OBJC
 @interface #{info[:class][0][0]} : #{info[:class][0][1]}
 
 #{info[:outlets].map {|name, type| "@property IBOutlet #{generate_type(type)} #{name};" }.join("\n")}
@@ -43,7 +45,10 @@ OBJC
 
 @end
 OBJC
-    end.join("\n" * 2)
+        output << "\n\n"
+      end
+    end
+    output
   end
 
   def generate_objc_impl files

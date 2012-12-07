@@ -13,8 +13,9 @@ class IB::Parser
     files = Dir.glob("#{dir_or_files}/**/*.rb").to_a if dir_or_files.class == String
     
     files.each do |file|
-      if info = find(file)
-        all[file] = info
+      infos = find(file)
+      if infos.length > 0
+        all[file] = infos
       end
     end
     all
@@ -22,17 +23,30 @@ class IB::Parser
 
   def find(path)
     src = File.read(path)
-    info = {class: find_class(src)}
+    offsets = []
+    src.scan CLASS_REGEX do |b|
+      offsets << $~.offset(0)
+    end
 
-    return false if info[:class].length == 0
+    return [] if offsets.length == 0
+    infos = []
+    pairs = offsets.map {|o| o[0]}
 
-    info[:outlets] = find_outlets(src)
-    info[:outlet_collections] = find_outlet_collections(src)
-    info[:actions] = find_actions(src)
+    pairs << src.length
+    (pairs.length - 1).times do |i|
+      s = src[pairs[i], pairs[i+1]]
+      info = {class: find_class(s)}
 
-    info[:path] = path
+      info[:outlets] = find_outlets(s)
+      info[:outlet_collections] = find_outlet_collections(s)
+      info[:actions] = find_actions(s)
 
-    info
+      info[:path] = path
+
+      infos << info
+    end
+
+    infos
   end
 
   def find_class src
