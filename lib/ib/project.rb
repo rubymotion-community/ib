@@ -37,7 +37,7 @@ class IB::Project
     end
 
     %W{QuartzCore CoreGraphics CoreData}.each do |framework|
-      project.add_system_framework framework
+      project.add_system_framework framework, target
     end
 
     project.save_as("ib.xcodeproj")
