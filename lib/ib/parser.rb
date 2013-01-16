@@ -9,8 +9,12 @@ class IB::Parser
 
   def find_all(dir_or_files)
     all = {}
-    files = dir_or_files
-    files = Dir.glob("#{dir_or_files}/**/*.rb").to_a if dir_or_files.class == String
+    files = case dir_or_files
+    when Array
+      dir_or_files.flatten
+    else
+      Dir.glob("#{dir_or_files.to_s}/**/*.rb").to_a
+    end
     
     files.each do |file|
       infos = find(file)
