@@ -125,6 +125,12 @@ Here is [sample app](https://github.com/yury/ibsample)
 
 **Note** : this app is build for iOS 6.0
 
+# Another Sample app
+
+Here is [another sample app](https://github.com/hqmq/whereami)
+
+You can play around with it in the same way as the Sample app above. This sample uses a single xib file rather than a storyboard.
+
 ## Contributing
 
 1. Fork it
