@@ -35,7 +35,7 @@ OBJC
     files.map do |path, infos|
       infos.each do |info|
         output << <<-OBJC
-@interface #{info[:class][0][0]} : #{info[:class][0][1]}
+@interface #{info[:class][0][0]}#{info[:class][0][1] ? ": #{info[:class][0][1]}" : ""}
 
 #{info[:outlets].map {|name, type| "@property IBOutlet #{generate_type(type)} #{name};" }.join("\n")}
 

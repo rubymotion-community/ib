@@ -1,6 +1,6 @@
 class IB::Parser
   NAME_REGEX = /[a-zA-Z][_a-zA-Z0-9]*/
-  CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})[ \t]*<[ \t]*(#{NAME_REGEX})/
+  CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})([ \t]*<[ \t]*(#{NAME_REGEX}))?/
   OUTLET_REGEX = /^[ \t]+(ib_)?outlet(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   OUTLET_COLLECTION_REGEX = /^[ \t]+(ib_)?outlet_collection(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   METHOD_REF_REGEX = /^[ \t]+(ib_action)[ \t]:(#{NAME_REGEX})/
@@ -47,6 +47,13 @@ class IB::Parser
 
       info[:path] = path
 
+      # skip empty classes
+      if info[:outlets].empty? &&
+        info[:outlet_collections].empty? &&
+        info[:actions].empty? && info[:class][0][1].nil?
+        next
+      end
+
       infos << info
     end
 
@@ -54,7 +61,9 @@ class IB::Parser
   end
 
   def find_class src
-    src.scan CLASS_REGEX
+    src.scan(CLASS_REGEX).map do |groups|
+      [groups[0], groups[2]]
+    end
   end
 
   def find_outlets src
