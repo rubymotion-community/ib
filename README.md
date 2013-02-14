@@ -2,7 +2,7 @@
 
 rubymotion interface builder support (yes, with outlets)
 
-[![SpellCheck](http://spellhub.com/projects/status/7)](http://spellhub.com/projects/project/7)
+[![SpellHub](http://spellhub.com/projects/status/7)](http://spellhub.com/projects/project/7)
 
 [**Change Log**](https://github.com/yury/ib/wiki/Change-Log)
 
