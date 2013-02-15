@@ -1,4 +1,4 @@
-require 'rake'
+require 'rake' unless defined? Rake
 
 namespace :ib do
   desc "Generates ib.xcodeproj and opens it in XCode"
