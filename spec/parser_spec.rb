@@ -19,11 +19,12 @@ describe IB::Parser do
       ["yellowLabelCollection",    "id"]
     ]
     info[:actions].should == [
-      ["someAction",         "sender"],
-      ["anotherAction",      "button"],
-      ["actionWithComment",  "sender"],
-      ["actionWithBrackets", "sender"],
-      ["actionWithoutArgs",  nil]
+      ["someAction",         "sender", nil],
+      ["anotherAction",      "button", nil],
+      ["actionWithComment",  "sender", nil],
+      ["actionWithBrackets", "sender", nil],
+      ["actionWithoutArgs",  nil, nil],
+      ["segueAction",        "sender", "UIStoryboardSegue"]
     ]
   end
 
