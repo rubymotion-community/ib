@@ -3,7 +3,7 @@ class IB::Parser
   CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})([ \t]*<[ \t]*(#{NAME_REGEX}))?/
   OUTLET_REGEX = /^[ \t]+(ib_)?outlet(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   OUTLET_COLLECTION_REGEX = /^[ \t]+(ib_)?outlet_collection(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
-  METHOD_REF_REGEX = /^[ \t]+(ib_action)[ \t]:(#{NAME_REGEX})/
+  METHOD_REF_REGEX = /^[ \t]+(ib_action)[ \t]:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   METHOD_DEF_REGEX = /^[ \t]+(def)[ \t](#{NAME_REGEX})([ \t(]+)?(#{NAME_REGEX})?([ \t)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
 
@@ -81,9 +81,9 @@ class IB::Parser
   def find_actions src
     src.scan(ACTION_REGEX).map do |groups|
       if groups[0] == "def"
-        [groups[1], groups[3]]
+        [groups[1], groups[3], nil]
       elsif groups[6] == "ib_action"
-        [groups[7], 'sender']
+        [groups[7], 'sender', groups[9]]
       else
         nil
       end
