@@ -14,7 +14,7 @@ module IB
     attr_accessor name
   end
 
-  def ib_action name
+  def ib_action name, type = "id"
   end
 
 end

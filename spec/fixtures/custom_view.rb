@@ -16,6 +16,7 @@ class CustomView < UIView
   outlet_collection :yellowLabelCollection
 
   ib_action :someAction
+  ib_action :segueAction, UIStoryboardSegue
 
   def anotherAction button
   end
