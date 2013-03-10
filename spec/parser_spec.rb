@@ -20,11 +20,11 @@ describe IB::Parser do
     ]
     info[:actions].should == [
       ["someAction",         "sender", nil],
+      ["segueAction",        "sender", "UIStoryboardSegue"],
       ["anotherAction",      "button", nil],
       ["actionWithComment",  "sender", nil],
       ["actionWithBrackets", "sender", nil],
-      ["actionWithoutArgs",  nil, nil],
-      ["segueAction",        "sender", "UIStoryboardSegue"]
+      ["actionWithoutArgs",  nil, nil]
     ]
   end
 

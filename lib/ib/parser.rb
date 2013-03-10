@@ -83,7 +83,7 @@ class IB::Parser
       if groups[0] == "def"
         [groups[1], groups[3], nil]
       elsif groups[6] == "ib_action"
-        [groups[7], 'sender', groups[8]]
+        [groups[7], 'sender', groups[9]]
       else
         nil
       end
