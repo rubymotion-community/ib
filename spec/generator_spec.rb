@@ -32,7 +32,7 @@ describe IB::Generator do
 @property IBOutletCollection(id) NSArray * yellowLabelCollection;
 
 -(IBAction) someAction:(id) sender;
--(IBAction) segueAction:(UIStoryboardSegue) sender;
+-(IBAction) segueAction:(UIStoryboardSegue*) sender;
 -(IBAction) anotherAction:(id) button;
 -(IBAction) actionWithComment:(id) sender;
 -(IBAction) actionWithBrackets:(id) sender;

@@ -71,6 +71,6 @@ OBJC
   end
 
   def generate_action action
-    action[1] ? "#{action[0]}:(#{action[2] || 'id'}) #{action[1]}" : "#{action[0]}"
+    action[1] ? "#{action[0]}:(#{action[2] ? "#{action[2]}*" : 'id'}) #{action[1]}" : "#{action[0]}"
   end
 end
