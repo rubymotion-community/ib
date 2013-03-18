@@ -33,7 +33,7 @@ class CustomView < UIView
   def actionWithoutArgs
   end
 
-  def actionWithDefaultedArgs(sender = nil)
+  def actionWithDefaultedArgs(sender = nil) #comment
   end
 
 end
