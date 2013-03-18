@@ -3,9 +3,12 @@ class IB::Parser
   CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})([ \t]*<[ \t]*(#{NAME_REGEX}))?/
   OUTLET_REGEX = /^[ \t]+(ib_)?outlet(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   OUTLET_COLLECTION_REGEX = /^[ \t]+(ib_)?outlet_collection(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
+  METHOD_ARGUMENT_REGEX = /(#{NAME_REGEX})(?:[ \t]*=[ \t]*#{NAME_REGEX})?/
   METHOD_REF_REGEX = /^[ \t]+(ib_action)[ \t]:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
-  METHOD_DEF_REGEX = /^[ \t]+(def)[ \t](#{NAME_REGEX})([ \t(]+)?(#{NAME_REGEX})?([ \t)]*)(#.*)?$/
+  METHOD_DEF_REGEX = /^[ \t]+(def)[ \t]#{METHOD_ARGUMENT_REGEX}([ \t(]+)?#{METHOD_ARGUMENT_REGEX}?([ \t)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
+
+  p METHOD_DEF_REGEX
 
   def find_all(dir_or_files)
     all = {}
