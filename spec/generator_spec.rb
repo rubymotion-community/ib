@@ -37,6 +37,7 @@ describe IB::Generator do
 -(IBAction) actionWithComment:(id) sender;
 -(IBAction) actionWithBrackets:(id) sender;
 -(IBAction) actionWithoutArgs;
+-(IBAction) actionWithDefaultedArgs:(id) sender;
 
 @end
 
