@@ -8,8 +8,6 @@ class IB::Parser
   METHOD_DEF_REGEX = /^[ \t]+(def)[ \t]#{METHOD_ARGUMENT_REGEX}([ \t(]+)?#{METHOD_ARGUMENT_REGEX}?([ \t)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
 
-  p METHOD_DEF_REGEX
-
   def find_all(dir_or_files)
     all = {}
     files = case dir_or_files
