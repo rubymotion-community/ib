@@ -27,7 +27,7 @@ OBJC
 #{generate_objc_impl(files)}
 OBJC
     end
-    
+
   end
 
   def generate_objc files

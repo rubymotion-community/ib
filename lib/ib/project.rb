@@ -1,7 +1,25 @@
 class IB::Project
-  def write app_path = "app", resources_path = "resources", pods_headers_path = "vendor/Pods/Headers"
+  attr_accessor :platform, :app_path, :resources_path, :pods_headers_path
+
+  def initialize options={}
+    @platform          = options[:platform] || detect_platform || :ios
+    @app_path          = options[:app_path] || "app"
+    @resources_path    = options[:resources_path] || "resources"
+    @pods_headers_path = options[:pods_headers_path] || "vendor/Pods/Headers"
+  end
+
+  def detect_platform
+    # TODO: find a better way to detect platform
+    if defined?(Motion::Project::Config)
+      if Motion::Project::App.config.respond_to?(:platforms)
+        Motion::Project::App.config.platforms[0] == 'MacOSX' ? :osx : :ios
+      end
+    end
+  end
+
+  def write
     project = Xcodeproj::Project.new
-    target = project.new_target(:static_library, 'ib', :ios)
+    target = project.new_target(:static_library, 'ib', platform)
 
     resources = project.new_group("Resources")
     resources.path = resources_path
