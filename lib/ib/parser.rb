@@ -16,7 +16,7 @@ class IB::Parser
     else
       Dir.glob("#{dir_or_files.to_s}/**/*.rb").to_a
     end
-    
+
     files.each do |file|
       infos = find(file)
       if infos.length > 0

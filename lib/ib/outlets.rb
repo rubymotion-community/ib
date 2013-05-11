@@ -1,5 +1,5 @@
 module IB
-  
+
   def ib_outlet name, type = "id"
   end
 

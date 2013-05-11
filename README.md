@@ -1,4 +1,4 @@
-# IB 
+# IB
 
 rubymotion interface builder support (yes, with outlets)
 
@@ -24,11 +24,11 @@ In your Rake file:
 
 ```ruby
 
-$:.unshift("/Library/RubyMotion/lib")  
-require 'motion/project'  
+$:.unshift("/Library/RubyMotion/lib")
+require 'motion/project'
 
 # if you use bundler
-require 'bundler' 
+require 'bundler'
 Bundler.require
 
 # if you are not using bundler
@@ -54,7 +54,7 @@ class HelloController < UIViewController
   # define ib outlet
   outlet :title, UILabel # @property IBOutlet UILabel * title;
   outlet :untyped_label  # @property IBOutlet id untyped_label;
-  
+
   # define ib outlet collection
   outlet_collection :labels, UILabel # @property IBOutletCollection(UILabel) NSArray * labels;
 
@@ -120,7 +120,7 @@ Run `rake ib:open` create Storyboard or nibs (put them in resources folder) and 
 
 Here is [sample app](https://github.com/yury/ibsample)
 
-1. clone it 
+1. clone it
 2. run `bundle`
 3. run `rake ib:open` to change story board
 4. run `rake` to run app in simulator
