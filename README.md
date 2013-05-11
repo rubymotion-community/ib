@@ -20,6 +20,10 @@ Or install it yourself as:
 
     $ gem install ib
 
+Or use rubymotions templates by @infiniteNIL
+
+    https://github.com/infiniteNIL/RubyMotionTemplates
+
 In your Rake file:
 
 ```ruby
