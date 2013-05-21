@@ -66,10 +66,12 @@ class HelloController < UIViewController
 end
 ```
 
-**NOTE:** If you include methods and attributes from module, you can use `ib_outlet` and `ib_action` to make them visible in designer
+**NOTE:** If you include methods and attributes from module, you can use `ib_outlet` and `ib_action` to make them visible in Interface Builder
 
 ```ruby
 module TouchLogger
+  outlet :my_button, UIButton
+
   def controlTouched sender
     puts "touched"
   end
@@ -80,7 +82,9 @@ class LogController < UIViewController
 
   include TouchLogger
 
+  ib_outlet :my_button
   ib_action :controlTouched
+
 end
 ```
 
@@ -114,9 +118,17 @@ class HelloController < UIViewController
 end
 ```
 
-Run `rake ib:open` create Storyboard or nibs (put them in resources folder) and you will be able to bind outlets and actions to your ruby code.
+### Using Interface Builder
 
-**Note** : add ib.xcodeproj to your .gitignore
+Running `rake ib:open` will create a ib.xcodeproj in the root of your app and open XCode. You can create Storyboards or nibs, and save them in your `resources` directory in order to be picked up by RubyMotion.
+
+Everytime you make a change in your ruby files (like adding a new outlet or action method) you have to run `rake ib:open` in order to let Interface Builder see the changes.
+
+**Tip** : add ib.xcodeproj to your .gitignore
+
+### How it works
+
+This gem parses your Ruby code and generates two Objective-c files (Stub.m and Stub.h) which are populated with the classes, methods and outlets you have defined. This is necessary for Interface Builder to bind outlets and actions to your code.
 
 # Sample app
 
