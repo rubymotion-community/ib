@@ -1,6 +1,6 @@
 # IB
 
-rubymotion interface builder support (yes, with outlets)
+RubyMotion interface builder support (yes, with outlets)
 
 <a href='http://spellhub.com/projects/project/7'><img src="http://spellhub.com/projects/status/7" height="18"></a>
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
     $ gem install ib
 
-Or use rubymotions [templates by @infiniteNIL](https://github.com/infiniteNIL/RubyMotionTemplates)
+Or use RubyMotion [templates by @infiniteNIL](https://github.com/infiniteNIL/RubyMotionTemplates)
 
 In your Rake file:
 
