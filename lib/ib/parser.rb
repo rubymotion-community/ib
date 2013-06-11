@@ -40,7 +40,7 @@ class IB::Parser
     pairs << src.length
     (pairs.length - 1).times do |i|
       s = src[pairs[i], pairs[i+1]]
-      info = {class: find_class(s)}
+      info = {:class => find_class(s)}
 
       info[:outlets] = find_outlets(s)
       info[:outlet_collections] = find_outlet_collections(s)
