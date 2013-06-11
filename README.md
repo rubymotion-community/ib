@@ -1,6 +1,6 @@
 # IB
 
-rubymotion interface builder support (yes, with outlets)
+RubyMotion interface builder support (yes, with outlets)
 
 <a href='http://spellhub.com/projects/project/7'><img src="http://spellhub.com/projects/status/7" height="18"></a>
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
     $ gem install ib
 
-Or use rubymotions [templates by @infiniteNIL](https://github.com/infiniteNIL/RubyMotionTemplates)
+Or use RubyMotion [templates by @infiniteNIL](https://github.com/infiniteNIL/RubyMotionTemplates)
 
 In your Rake file:
 
@@ -144,6 +144,10 @@ Here is [sample app](https://github.com/yury/ibsample)
 # Another Sample app
 
 Here is [another sample app](https://github.com/hqmq/whereami)
+
+# OS X Sample app
+
+Here is [OS X sample app](https://github.com/MarkVillacampa/motion-osx-ib)
 
 You can play around with it in the same way as the Sample app above. This sample uses a single xib file rather than a storyboard.
 
