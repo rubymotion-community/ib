@@ -18,19 +18,20 @@ class IB::Project
   end
 
   def write
-    project = Xcodeproj::Project.new
+    ib_project = "ib.xcodeproj"
+    project = Xcodeproj::Project.new(ib_project)
     target = project.new_target(:static_library, 'ib', platform)
 
     resources = project.new_group("Resources")
     resources.path = resources_path
 
     support   = project.new_group("Supporting Files")
-    support.path = "ib.xcodeproj"
+    support.path = ib_project
 
     pods      = project.new_group("Pods")
     pods.path = pods_headers_path
 
-    IB::Generator.new.write(Motion::Project::App.config.files, "ib.xcodeproj")
+    IB::Generator.new.write(Motion::Project::App.config.files, ib_project)
 
     support.new_file "ib.xcodeproj/Stubs.h"
     file = support.new_file "ib.xcodeproj/Stubs.m"
@@ -58,6 +59,6 @@ class IB::Project
       project.add_system_framework framework, target
     end
 
-    project.save_as("ib.xcodeproj")
+    project.save(ib_project)
   end
 end
