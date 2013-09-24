@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = IB::VERSION
 
-  gem.add_dependency "xcodeproj", ">= 0.10.1"
+  gem.add_dependency "xcodeproj", ">= 0.11.0"
   gem.add_dependency "thor", ">= 0.15.4"
 
   gem.add_development_dependency "rspec", ">= 2.0"
