@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["yury.korolev@gmail.com", "francis@ignition.hk"]
   gem.description   = %q{Magic rubymotion ib outlets support}
   gem.summary       = %q{Small portion of love to interface builder with rubymotion}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/yury/ib"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
