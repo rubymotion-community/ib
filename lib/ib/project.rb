@@ -39,20 +39,11 @@ class IB::Project
 
     resource_exts = %W{xcdatamodeld png jpg jpeg storyboard xib lproj}
     Dir.glob("#{resources_path}/**/*.{#{resource_exts.join(",")}}") do |file|
-      if file.end_with? ".xcdatamodeld"
-        relative_file_path = file.split("/").last
-        obj = resources.new_xcdatamodel_group(relative_file_path)
-        internal_file = obj.files.first
-        internal_file.path = relative_file_path.gsub(/xcdatamodeld$/, 'xcdatamodel')
-        internal_file.source_tree = "<group>"
-        resources.children << obj
-      else
-        resources.new_file(file)
-      end
+      resources.new_reference(file)
     end
 
     Dir.glob("#{pods_headers_path}/**/*.h") do |file|
-      pods.new_file(file)
+      pods.new_reference(file)
     end
 
     %W{QuartzCore CoreGraphics CoreData}.each do |framework|
