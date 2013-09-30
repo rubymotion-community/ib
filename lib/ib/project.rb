@@ -31,7 +31,7 @@ class IB::Project
     pods      = project.new_group("Pods")
     pods.path = pods_headers_path
 
-    generator = IB::Generator.new(Motion::Project::App.template)
+    generator = IB::Generator.new(detect_platform)
     generator.write(Motion::Project::App.config.files, ib_project)
 
     support.new_file "ib.xcodeproj/Stubs.h"
