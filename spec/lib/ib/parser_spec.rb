@@ -4,7 +4,7 @@ require "ib/parser"
 
 describe IB::Parser do
   it "finds outlets and actions" do
-    info = IB::Parser.new.find("spec/fixtures/custom_view.rb").first
+    info = IB::Parser.new.find("spec/fixtures/common/custom_view.rb").first
     info[:class].should == [["CustomView", "UIView"]]
     info[:outlets].should == [
       ["greenLabel",    "UIGreenLabel"],
@@ -30,10 +30,16 @@ describe IB::Parser do
   end
 
   it "detects simple classes" do
-    IB::Parser.new.find("spec/fixtures/simple_class.rb").length.should == 0
+    IB::Parser.new.find("spec/fixtures/common/simple_class.rb").length.should == 0
   end
 
   it "finds all infos" do
-    puts IB::Parser.new.find_all("spec/fixtures").inspect
+    infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
+    expect(infos.size).to eq 3
+  end
+
+  it "finds all sorted infos" do
+    infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
+    expect(infos.size).to eq 3
   end
 end
