@@ -3,7 +3,7 @@
 RubyMotion interface builder support (yes, with outlets)
 
 <a href='http://spellhub.com/projects/project/7'><img src="http://spellhub.com/projects/status/7" height="18"></a>
-[![Build Status](https://travis-ci.org/yury/ib.png)](https://travis-ci.org/yury/ib)
+[![Build Status](https://travis-ci.org/yury/ib.png?branch=master)](https://travis-ci.org/yury/ib)
 
 [**Change Log**](https://github.com/yury/ib/wiki/Change-Log)
 
