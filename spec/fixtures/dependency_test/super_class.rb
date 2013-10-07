@@ -1,0 +1,2 @@
+class SuperClass < UIViewController
+end

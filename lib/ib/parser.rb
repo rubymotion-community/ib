@@ -1,3 +1,5 @@
+require 'ib/dependency_resolver'
+
 class IB::Parser
   NAME_REGEX = /[a-zA-Z][_a-zA-Z0-9]*/
   CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})([ \t]*<[ \t]*(#{NAME_REGEX}))?/
@@ -23,7 +25,8 @@ class IB::Parser
         all[file] = infos
       end
     end
-    all
+
+    IB::DependencyResolver.new(all).sort
   end
 
   def find(path)

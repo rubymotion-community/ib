@@ -4,7 +4,7 @@ require "ib/generator"
 
 describe IB::Generator do
   it "generates stubs header with ios platform" do
-    files = IB::Parser.new.find_all("spec/fixtures")
+    files = IB::Parser.new.find_all("spec/fixtures/common")
     stubs = IB::Generator.new(:ios).render_stub_file('generator/templates/Stubs.h.erb', files)
 
     stubs.should == <<-OBJC
@@ -54,7 +54,7 @@ OBJC
   end
 
   it "generates stubs header with osx platform" do
-    files = IB::Parser.new.find_all("spec/fixtures")
+    files = IB::Parser.new.find_all("spec/fixtures/common")
     stubs = IB::Generator.new(:osx).render_stub_file('generator/templates/Stubs.h.erb', files)
 
     stubs.should == <<-OBJC
@@ -104,7 +104,8 @@ OBJC
   end
 
   it "generates stubs implement" do
-    files = IB::Parser.new.find_all("spec/fixtures")
+    files = IB::Parser.new.find_all("spec/fixtures/common")
+
     stubs = IB::Generator.new(:ios).render_stub_file('generator/templates/Stubs.m.erb', files)
 
     stubs.should == <<-OBJC

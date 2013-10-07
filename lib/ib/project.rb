@@ -17,6 +17,12 @@ class IB::Project
     end
   end
 
+  def app_files
+    Motion::Project::App.config.files.select do |file|
+      file =~ /^(\.\/)?app\//
+    end
+  end
+
   def write
     ib_project = "ib.xcodeproj"
     project = Xcodeproj::Project.new(ib_project)
@@ -32,7 +38,7 @@ class IB::Project
     pods.path = pods_headers_path
 
     generator = IB::Generator.new(detect_platform)
-    generator.write(Motion::Project::App.config.files, ib_project)
+    generator.write(app_files, ib_project)
 
     support.new_file "ib.xcodeproj/Stubs.h"
     file = support.new_file "ib.xcodeproj/Stubs.m"
