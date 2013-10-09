@@ -13,6 +13,28 @@ module IB
       end
     end
 
+    module TSortable
+      def to_node
+        sub_class_dependencies_nodes = sub_class_dependencies.inject({}) do |sum, i|
+          sum.merge!({ i => [] })
+        end
+
+        (super_class ? node_with_super_class : node_without_super_class).
+          merge(sub_class_dependencies_nodes)
+      end
+
+      def node_with_super_class
+        {
+          sub_class   => sub_class_dependencies,
+          super_class => [],
+        }
+      end
+
+      def node_without_super_class
+        { sub_class => sub_class_dependencies }
+      end
+    end
+
     attr_reader :class_nodes, :files
 
     def initialize(files)
@@ -26,11 +48,9 @@ module IB
 
     def sort_files
       sort_classes.map do |klass|
-        files.select do |file, class_definitions|
-          has_class_in_file?(klass, class_definitions)
-        end.first
-      end.map do |file, _|
-        file
+        files.select do |file, interfaces|
+          interfaces.any?{|i| i.has_sub_class?(klass) }
+        end.keys[0]
       end.uniq.compact
     end
 
@@ -43,41 +63,11 @@ module IB
     end
 
     private
-    def has_class_in_file?(klass, class_definitions)
-      !class_definitions.select do |x|
-        x[:class][0][0] == klass
-      end.empty?
-    end
-
-    def has_super_class?(class_definition)
-      class_definition[:class][0].size == 2      
-    end
-
     def struct_class_node
-      list_of_hash = @files.map do |file, class_definitions|
-        class_definitions.map do |class_definition| create_node(class_definition) end
-      end.flatten
-
+      list_of_hash = @files.values.flatten.map {|i| i.extend TSortable }.map(&:to_node)
       list_of_hash.inject(TSortHash.new) do |sum, x|
         sum.merge!(x)
       end
-    end
-
-    def create_node(class_definition)
-      has_super_class?(class_definition) ?
-        node_with_super_class(class_definition):
-          node_without_super_class(class_definition)
-    end
-
-    def node_with_super_class(class_definition)
-      {
-        class_definition[:class][0][0] => [class_definition[:class][0][1]],
-        class_definition[:class][0][1] => [],
-      }
-    end
-
-    def node_without_super_class(class_definition)
-      { class_definition[:class][0][0] => [] }
     end
   end
 end
