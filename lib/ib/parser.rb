@@ -1,4 +1,5 @@
 require 'ib/dependency_resolver'
+require 'ib/oc_interface'
 
 class IB::Parser
   NAME_REGEX = /[a-zA-Z][_a-zA-Z0-9]*/
@@ -58,7 +59,7 @@ class IB::Parser
         next
       end
 
-      infos << info
+      infos << IB::OCInterface.new(info)
     end
 
     infos
