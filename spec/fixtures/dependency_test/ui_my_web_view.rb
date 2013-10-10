@@ -1,0 +1,2 @@
+class UIMyWebView < UIWebView
+end

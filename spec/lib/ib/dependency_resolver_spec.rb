@@ -21,7 +21,7 @@ describe IB::DependencyResolver do
       it 'create a instance IB::DependencyResolver' do
         resolver = IB::DependencyResolver.new(@files)
         expect(
-          resolver.class_nodes.kind_of?(IB::DependencyResolver::TSortHash)
+          resolver.dependency_graph.kind_of?(IB::DependencyResolver::TSortHash)
         ).to be_true
       end
     end
@@ -70,7 +70,7 @@ describe IB::DependencyResolver do
         resolver = IB::DependencyResolver.new(@files)
         expect(
           resolver.sort_classes
-        ).to eq(['SubClass1', 'SubClass2', 'SuperClass'])
+        ).to eq(['SubClass1', 'NSObject','SubClass2', 'SuperClass'])
       end
     end
 
@@ -109,7 +109,7 @@ describe IB::DependencyResolver do
         resolver = IB::DependencyResolver.new(@files)
         expect(
           resolver.sort_classes
-        ).to eq(['SuperClass', 'SubClass2', 'SubClass1'])
+        ).to eq(['SuperClass', 'SubClass2', 'SubClass1', 'NSObject'])
       end
     end
 
@@ -160,7 +160,7 @@ describe IB::DependencyResolver do
       it 'create a instance IB::DependencyResolver' do
         resolver = IB::DependencyResolver.new(@files)
         expect(
-          resolver.class_nodes.kind_of?(IB::DependencyResolver::TSortHash)
+          resolver.dependency_graph.kind_of?(IB::DependencyResolver::TSortHash)
         ).to be_true
       end
     end

@@ -1,0 +1,2 @@
+class AddButton < BaseView
+end

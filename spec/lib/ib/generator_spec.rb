@@ -153,7 +153,10 @@ OBJC
 @interface BaseView: NSObject
 @end
 
-@interface OriginalButton: BaseView
+@interface AddButton: BaseView
+@end
+
+@interface AppDelegate: UIResponder <UIApplicationDelegate>
 @end
 
 @interface SuperClass: UIViewController
@@ -161,7 +164,7 @@ OBJC
 
 @interface SubView1: UIView
 
-@property IBOutlet OriginalButton * button;
+@property IBOutlet AddButton * button;
 
 -(IBAction) action_test:(id) sender;
 
@@ -174,6 +177,9 @@ OBJC
 @end
 
 @interface SubClass1: SubClass2
+@end
+
+@interface UIMyWebView: UIWebView
 @end
 
 OBJC

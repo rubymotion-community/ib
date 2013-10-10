@@ -35,11 +35,11 @@ describe IB::Parser do
 
   it "finds all infos" do
     infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
-    expect(infos.size).to eq 3
+    infos.values.each do |vals| 
+      vals.each do |v|
+        expect(v).to be_kind_of(IB::OCInterface)
+      end
+    end
   end
 
-  it "finds all sorted infos" do
-    infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
-    expect(infos.size).to eq 3
-  end
 end
