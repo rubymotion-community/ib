@@ -19,14 +19,6 @@ module IB
         @build_platform == :osx
       end
 
-      def generate_type type
-        type == "id" ? type : "#{type} *"
-      end
-
-      def generate_action action
-        action[1] ? "#{action[0]}:(#{action[2] ? "#{action[2]}*" : 'id'}) #{action[1]}" : "#{action[0]}"
-      end
-
     end
   end
 end

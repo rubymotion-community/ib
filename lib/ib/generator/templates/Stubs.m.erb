@@ -3,9 +3,9 @@
 
 #import "Stubs.h"
 
-<% @files.map do |path, infos| %>
-<% infos.each do |info| %>
-@implementation <%= info[:class][0][0] %>
+<% @files.map do |path, interfaces| %>
+<% interfaces.each do |interface| %>
+@implementation <%= interface[:class][0][0] %>
 @end
 
 <% end; end; %>
