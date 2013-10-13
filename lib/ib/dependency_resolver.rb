@@ -42,7 +42,7 @@ module IB
             a[k] = v
           end
         end
-        return a
+        a
       end
       module_function :merge!
     end
@@ -61,7 +61,7 @@ module IB
     def sort_files
       sort_classes.map do |klass|
         files.select do |file, interfaces|
-          interfaces.any?{|i| i.has_sub_class?(klass) }
+          interfaces.any? {|i| i.has_sub_class?(klass) }
         end.keys[0]
       end.uniq.compact
     end

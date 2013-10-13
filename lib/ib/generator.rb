@@ -6,7 +6,7 @@ class IB::Generator
   def initialize motion_template_type
     # NOTE: motion_template_type equal to Motion::Project::App.template
     #       but, this class use its value for judging build platform.
-    @build_platform = motion_template_type 
+    @build_platform = motion_template_type
   end
 
   def absolute_template_path path
@@ -20,7 +20,7 @@ class IB::Generator
 
   def write files, dest
     files = IB::Parser.new.find_all(files)
-    
+
     FileUtils.mkpath dest
 
     File.open("#{dest}/Stubs.h", 'w') do |f|

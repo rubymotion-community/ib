@@ -37,14 +37,14 @@ class IB::OCInterface
 
   def sub_class_dependencies
     [
-      @super_class, extract_types(@outlets), extract_types(@outlet_collections)
-    ].flatten.uniq.compact.select do |klass|
-      klass != 'id'
-    end
+      @super_class,
+      extract_types(@outlets),
+      extract_types(@outlet_collections)
+    ].flatten.uniq.compact.select { |klass| klass != 'id' }
   end
 
   def has_class?(klass)
-    [sub_class, *sub_class_dependencies].any? do |k| k == klass end
+    [sub_class, *sub_class_dependencies].any? { |k| k == klass }
   end
 
   def has_sub_class?(klass)
@@ -53,11 +53,11 @@ class IB::OCInterface
 
   private
   def create_instances(klass, array)
-    (array||[]).map do |x| klass.new(*x) end
+    Array(array).map { |x| klass.new(*x) }
   end
 
   def extract_types(array)
-    (array||[]).map do |x| x.type end.compact
+    Array(array).map { |x| x.type }.compact
   end
 
 end
