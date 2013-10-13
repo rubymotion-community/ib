@@ -33,17 +33,29 @@ module IB
       def node_without_super_class
         { sub_class => sub_class_dependencies }
       end
+
+      def merge!(a, b)
+        b.each do |k, v|
+          if a.key?(k)
+            a[k].concat(v)
+          else
+            a[k] = v
+          end
+        end
+        return a
+      end
+      module_function :merge!
     end
 
-    attr_reader :class_nodes, :files
+    attr_reader :dependency_graph, :files
 
     def initialize(files)
       @files = files
-      @class_nodes = struct_class_node
+      @dependency_graph = struct_class_dependency_graph
     end
 
     def sort_classes
-      @class_nodes.tsort
+      @dependency_graph.tsort
     end
 
     def sort_files
@@ -63,10 +75,10 @@ module IB
     end
 
     private
-    def struct_class_node
-      list_of_hash = @files.values.flatten.map {|i| i.extend TSortable }.map(&:to_node)
-      list_of_hash.inject(TSortHash.new) do |sum, x|
-        sum.merge!(x)
+    def struct_class_dependency_graph
+      nodes = @files.values.flatten.map {|i| i.extend TSortable }.map(&:to_node)
+      nodes.inject(TSortHash.new) do |sum, x|
+        TSortable.merge!(sum, x)
       end
     end
   end

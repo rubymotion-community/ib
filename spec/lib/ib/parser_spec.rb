@@ -29,8 +29,8 @@ describe IB::Parser do
     ]
   end
 
-  it "detects simple classes" do
-    IB::Parser.new.find("spec/fixtures/common/simple_class.rb").length.should == 0
+  it "can output simple classes" do
+    IB::Parser.new.find("spec/fixtures/common/simple_class.rb").length.should == 1
   end
 
   it "finds all infos" do

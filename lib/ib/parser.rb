@@ -52,13 +52,6 @@ class IB::Parser
 
       info[:path] = path
 
-      # skip empty classes
-      if info[:outlets].empty? &&
-        info[:outlet_collections].empty? &&
-        info[:actions].empty? && info[:class][0][1].nil?
-        next
-      end
-
       infos << IB::OCInterface.new(info)
     end
 
