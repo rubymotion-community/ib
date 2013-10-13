@@ -13,24 +13,56 @@ module IB
       end
     end
 
-    attr_reader :class_nodes, :files
+    module TSortable
+      def to_node
+        sub_class_dependencies_nodes = sub_class_dependencies.inject({}) do |sum, i|
+          sum.merge!({ i => [] })
+        end
+
+        (super_class ? node_with_super_class : node_without_super_class).
+          merge(sub_class_dependencies_nodes)
+      end
+
+      def node_with_super_class
+        {
+          sub_class   => sub_class_dependencies,
+          super_class => [],
+        }
+      end
+
+      def node_without_super_class
+        { sub_class => sub_class_dependencies }
+      end
+
+      def merge!(a, b)
+        b.each do |k, v|
+          if a.key?(k)
+            a[k].concat(v)
+          else
+            a[k] = v
+          end
+        end
+        return a
+      end
+      module_function :merge!
+    end
+
+    attr_reader :dependency_graph, :files
 
     def initialize(files)
       @files = files
-      @class_nodes = struct_class_node
+      @dependency_graph = struct_class_dependency_graph
     end
 
     def sort_classes
-      @class_nodes.tsort
+      @dependency_graph.tsort
     end
 
     def sort_files
       sort_classes.map do |klass|
-        files.select do |file, class_definitions|
-          has_class_in_file?(klass, class_definitions)
-        end.first
-      end.map do |file, _|
-        file
+        files.select do |file, interfaces|
+          interfaces.any?{|i| i.has_sub_class?(klass) }
+        end.keys[0]
       end.uniq.compact
     end
 
@@ -43,41 +75,11 @@ module IB
     end
 
     private
-    def has_class_in_file?(klass, class_definitions)
-      !class_definitions.select do |x|
-        x[:class][0][0] == klass
-      end.empty?
-    end
-
-    def has_super_class?(class_definition)
-      class_definition[:class][0].size == 2      
-    end
-
-    def struct_class_node
-      list_of_hash = @files.map do |file, class_definitions|
-        class_definitions.map do |class_definition| create_node(class_definition) end
-      end.flatten
-
-      list_of_hash.inject(TSortHash.new) do |sum, x|
-        sum.merge!(x)
+    def struct_class_dependency_graph
+      nodes = @files.values.flatten.map {|i| i.extend TSortable }.map(&:to_node)
+      nodes.inject(TSortHash.new) do |sum, x|
+        TSortable.merge!(sum, x)
       end
-    end
-
-    def create_node(class_definition)
-      has_super_class?(class_definition) ?
-        node_with_super_class(class_definition):
-          node_without_super_class(class_definition)
-    end
-
-    def node_with_super_class(class_definition)
-      {
-        class_definition[:class][0][0] => [class_definition[:class][0][1]],
-        class_definition[:class][0][1] => [],
-      }
-    end
-
-    def node_without_super_class(class_definition)
-      { class_definition[:class][0][0] => [] }
     end
   end
 end

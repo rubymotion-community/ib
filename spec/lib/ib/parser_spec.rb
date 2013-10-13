@@ -29,17 +29,17 @@ describe IB::Parser do
     ]
   end
 
-  it "detects simple classes" do
-    IB::Parser.new.find("spec/fixtures/common/simple_class.rb").length.should == 0
+  it "can output simple classes" do
+    IB::Parser.new.find("spec/fixtures/common/simple_class.rb").length.should == 1
   end
 
   it "finds all infos" do
     infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
-    expect(infos.size).to eq 3
+    infos.values.each do |vals| 
+      vals.each do |v|
+        expect(v).to be_kind_of(IB::OCInterface)
+      end
+    end
   end
 
-  it "finds all sorted infos" do
-    infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
-    expect(infos.size).to eq 3
-  end
 end

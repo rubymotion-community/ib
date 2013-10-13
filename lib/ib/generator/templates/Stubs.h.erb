@@ -9,22 +9,22 @@
 #import <Cocoa/Cocoa.h>
 <% end %>
 
-<% @files.map do |path, infos| %>
-<% infos.each do |info| %>
-@interface <%= info[:class][0][0] + (info[:class][0][1] ? ": #{info[:class][0][1]}" : "")%>
-<% unless info[:outlets].empty? %><%= "\n"%><% end %>
-<% info[:outlets].map do |name, type| %>
-@property IBOutlet <%= generate_type(type)%> <%= name %>;
+<% @files.each do |path, interfaces| %>
+<% interfaces.each do |interface| %>
+@interface <%= interface.sub_class + ": " + interface.super_class %>
+<% unless interface.outlets.empty? %><%= "\n"%><% end %>
+<% interface.outlets.each do |outlet| %>
+@property IBOutlet <%= outlet.formated_type %> <%= outlet.variable %>;
 <% end %>
-<% unless info[:outlets].empty? %><%= "\n"%><% end %>
-<% info[:outlet_collections].map do|name, type| %>
-@property IBOutletCollection(<%= type %>) NSArray * <%= name %>;
+<% unless interface.outlets.empty? %><%= "\n"%><% end %>
+<% interface.outlet_collections.each do|outlet_collection| %>
+@property IBOutletCollection(<%= outlet_collection.type %>) NSArray * <%= outlet_collection.variable %>;
 <% end %>
-<% unless info[:outlet_collections].empty? %><%= "\n"%><% end %>
-<% info[:actions].map do |action| %>
--(IBAction) <%= generate_action(action) %>;
+<% unless interface.outlet_collections.empty? %><%= "\n"%><% end %>
+<% interface.actions.each do |action| %>
+-(IBAction) <%= action.to_declare %>;
 <% end %>
-<% unless info[:actions].empty? %><%= "\n"%><% end %>
+<% unless interface.actions.empty? %><%= "\n"%><% end %>
 @end
 
 <% end; end %>

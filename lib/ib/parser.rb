@@ -1,4 +1,5 @@
 require 'ib/dependency_resolver'
+require 'ib/oc_interface'
 
 class IB::Parser
   NAME_REGEX = /[a-zA-Z][_a-zA-Z0-9]*/
@@ -51,14 +52,7 @@ class IB::Parser
 
       info[:path] = path
 
-      # skip empty classes
-      if info[:outlets].empty? &&
-        info[:outlet_collections].empty? &&
-        info[:actions].empty? && info[:class][0][1].nil?
-        next
-      end
-
-      infos << info
+      infos << IB::OCInterface.new(info)
     end
 
     infos
