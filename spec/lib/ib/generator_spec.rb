@@ -159,6 +159,12 @@ OBJC
 @interface AppDelegate: UIResponder <UIApplicationDelegate>
 @end
 
+@interface PromotionScreen: UIViewController
+@end
+
+@interface PromotionMapScreen: UIViewController
+@end
+
 @interface SuperClass: UIViewController
 @end
 
