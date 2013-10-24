@@ -11,7 +11,7 @@
 
 <% @files.each do |path, interfaces| %>
 <% interfaces.each do |interface| %>
-@interface <%= interface.sub_class + ": " + interface.super_class %>
+@interface <%= interface.sub_class + ": " + (interface.super_class.start_with?("PM::", "ProMotion::") ? "UIViewController" : interface.super_class) %>
 <% unless interface.outlets.empty? %><%= "\n"%><% end %>
 <% interface.outlets.each do |outlet| %>
 @property IBOutlet <%= outlet.formated_type %> <%= outlet.variable %>;

@@ -22,6 +22,12 @@ describe IB::Generator do
 
 @end
 
+@interface HasComplexSuperClass: Complex::SuperClass
+@end
+
+@interface HasLessComplexSuperClass: UIViewController
+@end
+
 @interface CustomView: UIView
 
 @property IBOutlet UIGreenLabel * greenLabel;
@@ -75,6 +81,12 @@ OBJC
 
 @end
 
+@interface HasComplexSuperClass: Complex::SuperClass
+@end
+
+@interface HasLessComplexSuperClass: UIViewController
+@end
+
 @interface CustomView: UIView
 
 @property IBOutlet UIGreenLabel * greenLabel;
@@ -123,6 +135,12 @@ OBJC
 @implementation AppDelegate
 @end
 
+@implementation HasComplexSuperClass
+@end
+
+@implementation HasLessComplexSuperClass
+@end
+
 @implementation CustomView
 @end
 
@@ -157,6 +175,12 @@ OBJC
 @end
 
 @interface AppDelegate: UIResponder <UIApplicationDelegate>
+@end
+
+@interface PromotionScreen: UIViewController
+@end
+
+@interface PromotionMapScreen: UIViewController
 @end
 
 @interface SuperClass: UIViewController

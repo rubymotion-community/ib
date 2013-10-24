@@ -29,13 +29,19 @@ describe IB::Parser do
     ]
   end
 
+  it "can parse complex superclasses" do
+    info = IB::Parser.new.find("spec/fixtures/common/complex_superclass.rb")
+    info.first[:class].should == [["HasComplexSuperClass", "Complex::SuperClass"]]
+    info.last[:class].should == [["HasLessComplexSuperClass", "PM::Screen"]]
+  end
+
   it "can output simple classes" do
     IB::Parser.new.find("spec/fixtures/common/simple_class.rb").length.should == 1
   end
 
   it "finds all infos" do
     infos = IB::Parser.new.find_all("spec/fixtures/dependency_test")
-    infos.values.each do |vals| 
+    infos.values.each do |vals|
       vals.each do |v|
         expect(v).to be_kind_of(IB::OCInterface)
       end
