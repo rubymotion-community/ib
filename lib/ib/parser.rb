@@ -3,7 +3,8 @@ require 'ib/oc_interface'
 
 class IB::Parser
   NAME_REGEX = /[a-zA-Z][_a-zA-Z0-9]*/
-  CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})([ \t]*<[ \t]*(#{NAME_REGEX}))?/
+  SUPERCLASS_REGEX = /(#{NAME_REGEX}):{0,2}(#{NAME_REGEX})/
+  CLASS_REGEX  = /^[ \t]*class[ \t]+(#{NAME_REGEX})([ \t]*<[ \t]*(#{SUPERCLASS_REGEX}))?/
   OUTLET_REGEX = /^[ \t]+(ib_)?outlet(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   OUTLET_COLLECTION_REGEX = /^[ \t]+(ib_)?outlet_collection(_accessor)?[ \t]+:(#{NAME_REGEX})[ \t]*?(,[ \t]*['"]?(#{NAME_REGEX}))?/
   METHOD_ARGUMENT_REGEX = /(#{NAME_REGEX})(?:[ \t]*=[^,#)]*)?/
