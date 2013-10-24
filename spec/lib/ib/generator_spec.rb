@@ -22,6 +22,12 @@ describe IB::Generator do
 
 @end
 
+@interface HasComplexSuperClass: Complex::SuperClass
+@end
+
+@interface HasLessComplexSuperClass: UIViewController
+@end
+
 @interface CustomView: UIView
 
 @property IBOutlet UIGreenLabel * greenLabel;
@@ -75,6 +81,12 @@ OBJC
 
 @end
 
+@interface HasComplexSuperClass: Complex::SuperClass
+@end
+
+@interface HasLessComplexSuperClass: UIViewController
+@end
+
 @interface CustomView: UIView
 
 @property IBOutlet UIGreenLabel * greenLabel;
@@ -121,6 +133,12 @@ OBJC
 #import "Stubs.h"
 
 @implementation AppDelegate
+@end
+
+@implementation HasComplexSuperClass
+@end
+
+@implementation HasLessComplexSuperClass
 @end
 
 @implementation CustomView
