@@ -19,6 +19,24 @@ module IB
         @build_platform == :osx
       end
 
+      def framework_headers
+        headers = ''
+        if defined?(Motion::Project::App.config.frameworks)
+          Motion::Project::App.config.frameworks.each do |framework|
+            headers << "\#import <#{framework}/#{framework}.h>\n"
+          end
+        else
+          headers << "#import <Foundation/Foundation.h>\n"
+          headers << "#import <CoreData/CoreData.h>\n"
+          if ios_project?
+            headers << "#import <UIKit/UIKit.h>\n"
+          elsif osx_project?
+            headers << "#import <Cocoa/Cocoa.h>\n"
+          end
+        end
+        headers
+      end
+
     end
   end
 end
