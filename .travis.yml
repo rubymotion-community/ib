@@ -1,4 +1,4 @@
 # cite from https://github.com/CocoaPods/Xcodeproj/blob/master/.travis.yml
 language: objective-c
-install: && rake bootstrap[use_bundle_dir]
+install: rake bootstrap[use_bundle_dir]
 script: bundle exec rake spec
