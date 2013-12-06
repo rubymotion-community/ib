@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class IB::OCInterface
   attr_reader :sub_class, :super_class, :outlets,
     :outlet_collections, :actions, :path

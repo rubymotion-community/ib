@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module IB
   class Generator
     class RenderingHelper

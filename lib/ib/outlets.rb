@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module IB
 
   def ib_outlet name, type = "id"
