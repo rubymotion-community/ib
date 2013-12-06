@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'ib/dependency_resolver'
 require 'ib/oc_interface'
 

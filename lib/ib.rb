@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 if defined?(Motion::Project::Config)
   Motion::Project::App.setup do |app|
     app.files.unshift File.join(File.dirname(__FILE__), 'ib/outlets.rb')

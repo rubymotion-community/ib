@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class IB::Project
   attr_accessor :platform, :app_path, :resources_path, :pods_headers_path
 
