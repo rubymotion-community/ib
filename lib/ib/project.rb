@@ -1,12 +1,13 @@
 # -*- encoding : utf-8 -*-
 class IB::Project
-  attr_accessor :platform, :app_path, :resources_path, :pods_headers_path
+  attr_accessor :platform, :app_path, :resources_path, :pods_headers_path, :project_path
 
   def initialize options={}
-    @platform          = options[:platform] || detect_platform || :ios
-    @app_path          = options[:app_path] || "app"
-    @resources_path    = options[:resources_path] || "resources"
-    @pods_headers_path = options[:pods_headers_path] || "vendor/Pods/Headers"
+    @platform          = options[:platform]          || detect_platform || :ios
+    @project_path      = options[:project_path]      || Dir.pwd
+    @app_path          = options[:app_path]          || "#{project_path}/app"
+    @resources_path    = options[:resources_path]    || "#{project_path}/resources"
+    @pods_headers_path = options[:pods_headers_path] || "#{project_path}/vendor/Pods/Headers"
   end
 
   def detect_platform
