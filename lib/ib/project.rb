@@ -63,6 +63,6 @@ class IB::Project
       target.add_system_framework framework
     end
 
-    project.save(ib_project)
+    project.save
   end
 end
