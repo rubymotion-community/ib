@@ -15,10 +15,12 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = IB::VERSION
 
-  gem.add_dependency "xcodeproj", ">= 0.11.1"
-  gem.add_dependency "thor", ">= 0.15.4"
-  gem.add_dependency "tilt", ">= 1.4.1"
+  gem.add_dependency 'xcodeproj', '~> 0.16.0'
+  gem.add_dependency 'thor',      '~> 0.15.4'
+  gem.add_dependency 'tilt',      '~> 1.4.1'
 
-  gem.add_development_dependency "rspec", ">= 2.0"
-  gem.add_development_dependency "rake"
+  gem.add_development_dependency 'rspec', '~> 2.0'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'guard-rspec'
+  gem.add_development_dependency 'guard-bundler'
 end

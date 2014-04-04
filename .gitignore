@@ -3,7 +3,6 @@
 .bundle
 .config
 .yardoc
-Gemfile.lock
 InstalledFiles
 _yardoc
 coverage
@@ -17,3 +16,5 @@ test/version_tmp
 tmp
 ui.xcodeproj
 ib.xcodeproj
+.ruby-version
+.rbenv-version
