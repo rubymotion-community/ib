@@ -12,3 +12,4 @@ namespace :ib do
     IB::Project.new.write
   end
 end
+task :ib => "ib:open"
