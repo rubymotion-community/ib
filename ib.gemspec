@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Magic rubymotion ib outlets support}
   gem.summary       = %q{Small portion of love to interface builder with rubymotion}
   gem.homepage      = "https://github.com/yury/ib"
+  gem.licenses      = ['BSD']
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
