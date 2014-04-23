@@ -34,8 +34,10 @@ class IB::OCInterface
   def super_class
     # for support `ProMotion` gem https://github.com/yury/ib/pull/45
     return 'UIViewController' if @super_class =~ /^(?:PM::|ProMotion::)/
+    delegate_class = App.template == :ios ? 'UIApplicationDelegate' : 'NSApplicationDelegate'
+    responder_class = App.template == :ios ? 'UIResponder' : 'NSResponder'
     @super_class ||
-      ((@sub_class == 'AppDelegate') ? 'UIResponder <UIApplicationDelegate>' : 'NSObject')
+      ((@sub_class == 'AppDelegate') ? "#{responder_class} <#{delegate_class}>" : 'NSObject')
   end
 
   def sub_class_dependencies
