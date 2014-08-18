@@ -88,7 +88,13 @@ class IB::Project
   end
 
   def add_resources
-    Dir.glob("#{resources.path}/**/*.{#{RESOURCE_EXTENSIONS.join(",")}}") do |file|
+    # First add reference to any asset catalogs.
+    Dir.glob("#{resources.path}/**/*.xcassets") do |file|
+      resources.new_reference(file)
+    end
+    # Add all other resources, ignoring files in existing asset catalogs
+    Dir["#{resources.path}/**/*.{#{RESOURCE_EXTENSIONS.join(",")}}"]
+      .reject {|f| f[%r{.*\.xcassets/.*}] }.each do |file|
       resources.new_reference(file)
     end
   end
