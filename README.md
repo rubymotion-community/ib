@@ -131,6 +131,17 @@ Everytime you make a change in your ruby files (like adding a new outlet or acti
 
 This gem parses your Ruby code and generates two Objective-c files (Stub.m and Stub.h) which are populated with the classes, methods and outlets you have defined. This is necessary for Interface Builder to bind outlets and actions to your code.
 
+### Warning
+
+Various versions of the `ib` gem are incompatible with advancing versions of Xcode. If you are not seeing your outlets and actions in Interface Builder, it's possible you have such a mismatch. Here's a way to find out if this might be true:
+
+* Check the version of the gem by doing `gem list|grep ib` from the command line.
+* Compare the version listed with that in the most current gem (assuming you are using a current version of Xcode). You can find this in `lib/ib/version.ib`
+
+If you find your version of the `ib` gem is not current, try `bundle update ib`. If this does not resolve the problem, the conflict can be in required versions of Thor. For example, Guard requires a particular version of Thor and `ib` does not specify. You may find removing Guard will allow your bundle update to bring `ib` up to the current version.
+
+> Further note: If you are working on a current app and are used to creating your views programmatically, read on. If you're an Interface Builder ninja, nevermind(tm). It is important that you set your File's Owner in Interface Builder *to the controller you are using*. Remember, *File's Owner*, not View. Next, drag the `View` outlet in File's owner to the view you should have by now created. This will reduce the traffic on Google looking up "how come I can't get my nib hooked up right?" And remember, because File's Owner is the controller, you will bind all outlets and actions to File's Owner, so look there for these magic thingies.
+
 # Sample app
 
 Here is [sample app](https://github.com/yury/ibsample)
