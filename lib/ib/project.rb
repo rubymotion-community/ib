@@ -128,7 +128,6 @@ class IB::Project
     Dir.glob("#{framework.path}/**/*.{h,m}") do |file|
       file_ref = framework_group.new_file File.join(project_path, file)
       framework_target.add_file_references([file_ref])
-      puts "path: #{framework.path}, file: #{file}"
     end
   end
 
