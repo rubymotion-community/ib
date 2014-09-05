@@ -116,8 +116,7 @@ class IB::Project
   end
 
   def extra_frameworks
-    extra_frameworks = Motion::Project::App.config.vendor_projects
-    extra_frameworks = extra_frameworks.select { |vp| vp.opts[:ib] }
+    Motion::Project::App.config.vendor_projects.select { |vp| vp.opts[:ib] }
   end
 
   def add_extra_framework(framework)
