@@ -119,6 +119,103 @@ class HelloController < UIViewController
 end
 ```
 
+### Support for IB_DESIGNABLE classes, and IBInspectable properties
+###### Thanks to Robert Malko (aka malkomalko) for adding this feature!
+
+To use this feature, you will need to create a simple framework using
+Objective-C.  Let's call our framework "DesignableKit".  We'll define just one
+public class, `DesignableView`, which will expose a `cornerRadius` property that
+we want to be able to edit in Xcode, and have the results shown at design-time.
+
+At a minimum, we need three files:
+
+- Framework header, which defines version constants and includes the public headers.  We'll call this `DesignableKit.h`
+- At least one public header, e.g. `DesignableView.h`
+- At least one implementation, e.g. `DesignableView.m`
+
+    mkdir -p frameworks/DesignableKit
+    touch frameworks/DesignableKit/DesignableKit.h
+    touch frameworks/DesignableKit/DesignableView.h
+    touch frameworks/DesignableKit/DesignableView.m
+
+Add this framework to your project from the Rakefile, and add a new custom
+option, introduced by **ib**:
+
+    app.vendor_project('frameworks/DesignableKit', :static, ib: true)
+
+That `ib: true` option will be detected by **ib**, and that framework will be
+included in the .xcodeproj that is created.  So now let's write our custom view
+code.
+
+Unfortunately, we'll have to rely on objective-c for now.  RubyMotion cannot yet
+compile Swift files (RM 2.32 at the time of this writing), and we have not yet
+added the ability to use a RubyMotion framework, *but this should be possible*!
+
+###### DesignableKit.h
+```objc
+#import <UIKit/UIKit.h>
+
+FOUNDATION_EXPORT double DesignableKitVersionNumber;
+FOUNDATION_EXPORT const unsigned char DesignableKitVersionString[];
+
+// import all the public headers of your framework
+#import <DesignableKit/DesignableView.h>
+```
+###### DesignableView.h
+```objc
+#import <UIKit/UIKit.h>
+
+IB_DESIGNABLE
+@interface DesignableView : UIView
+
+@property (nonatomic) IBInspectable CGFloat cornerRadius;
+
+@end
+```
+
+###### DesignableView.m
+```objc
+// we make sure to call [self setup] from all the designated initializers (UIViews have *two*!)
+#import "DesignableView.h"
+
+@implementation DesignableView
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+  if (self = [super initWithCoder:aDecoder]) {
+    [self setup];
+  }
+  return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame{
+  if (self = [super initWithFrame:frame]) {
+    [self setup];
+  }
+  return self;
+}
+
+- (void)prepareForInterfaceBuilder {
+  self.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)setup {
+  self.cornerRadius = 0;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+  _cornerRadius = cornerRadius;
+  self.layer.cornerRadius = cornerRadius;
+}
+
+@end
+```
+
+Now open interface builder, and make your change!
+
+    rake ib
+
+
+
 ### Using Interface Builder
 
 Running `rake ib` will create a ib.xcodeproj in the root of your app and open XCode. You can create Storyboards or nibs, and save them in your `resources` directory in order to be picked up by RubyMotion.
