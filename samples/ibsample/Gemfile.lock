@@ -1,0 +1,32 @@
+PATH
+  remote: ../..
+  specs:
+    ib (0.5.0)
+      thor (~> 0.15.4)
+      tilt (~> 1.4.1)
+      xcodeproj (~> 0.17)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    CFPropertyList (2.2.8)
+    activesupport (3.2.19)
+      i18n (~> 0.6, >= 0.6.4)
+      multi_json (~> 1.0)
+    colored (1.2)
+    i18n (0.6.11)
+    multi_json (1.10.1)
+    rake (0.9.6)
+    thor (0.15.4)
+    tilt (1.4.1)
+    xcodeproj (0.18.0)
+      CFPropertyList (~> 2.2)
+      activesupport (~> 3.0)
+      colored (~> 1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ib!
+  rake

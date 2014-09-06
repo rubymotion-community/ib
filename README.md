@@ -1,11 +1,11 @@
 # IB
 
-RubyMotion interface builder support (yes, with outlets)
+RubyMotion Interface Builder support (yes, with outlets)
 
 <a href='http://spellhub.com/projects/project/7'><img src="http://spellhub.com/projects/status/7" height="18"></a>
-[![Build Status](https://travis-ci.org/yury/ib.png?branch=master)](https://travis-ci.org/yury/ib)
+[![Build Status](https://travis-ci.org/rubymotion/ib.png?branch=master)](https://travis-ci.org/rubymotion/ib)
 
-[**Change Log**](https://github.com/yury/ib/wiki/Change-Log)
+[**Change Log**](https://github.com/rubymotion/ib/wiki/Change-Log)
 
 ## Installation
 
@@ -241,7 +241,7 @@ If you find your version of the `ib` gem is not current, try `bundle update ib`.
 
 # Sample app
 
-Here is [sample app](https://github.com/yury/ibsample)
+Here is a [sample app](https://github.com/rubymotion/ib/tree/master/samples/ibsample) using a storyboard, by **yury**.
 
 1. clone it
 2. run `bundle`
@@ -252,13 +252,14 @@ Here is [sample app](https://github.com/yury/ibsample)
 
 # Another Sample app
 
-Here is [another sample app](https://github.com/hqmq/whereami)
+Here is [another sample app](https://github.com/hqmq/whereami), by **hqmq**.
 
 # OS X Sample app
 
-Here is [OS X sample app](https://github.com/MarkVillacampa/motion-osx-ib)
+Here is an [OS X sample app](https://github.com/MarkVillacampa/motion-osx-ib) by **MarkVillacampa**
 
-You can play around with it in the same way as the Sample app above. This sample uses a single xib file rather than a storyboard.
+You can play around with it in the same way as the Sample app above. This sample
+uses a single xib file rather than a storyboard.
 
 ## Contributing
 

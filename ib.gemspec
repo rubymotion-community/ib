@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/yury/ib"
   gem.licenses      = ['BSD']
 
-  gem.files         = `git ls-files`.split($\)
+  gem.files         = `git ls-files`.split($\).reject { |f| f =~ %r{samples/} }
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "ib"
