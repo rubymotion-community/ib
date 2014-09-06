@@ -119,7 +119,7 @@ class HelloController < UIViewController
 end
 ```
 
-### Support for IB_DESIGNABLE classes, and IBInspectable properties
+### Support for IBDesignable classes, and IBInspectable properties
 ###### Thanks to Robert Malko (aka malkomalko) for adding this feature!
 
 To use this feature, you will need to create a simple framework using
@@ -248,7 +248,11 @@ Here is a [sample app](https://github.com/rubymotion/ib/tree/master/samples/ibsa
 3. run `rake ib` to change story board
 4. run `rake` to run app in simulator
 
-**Note** : this app is build for iOS 6.0
+**Note** : this app was built for iOS 6.0
+
+# IBDesignable Sample app
+
+A [sample app](https://github.com/rubymotion/ib/tree/master/samples/ibdesignable) based on the code above.  Written by **malkomalko**.
 
 # Another Sample app
 
