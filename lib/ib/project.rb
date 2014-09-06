@@ -109,6 +109,25 @@ class IB::Project
     DEFAULT_FRAMEWORKS.each do |framework|
       target.add_system_framework framework
     end
+
+    extra_frameworks.each do |framework|
+      add_extra_framework framework
+    end
+  end
+
+  def extra_frameworks
+    Motion::Project::App.config.vendor_projects.select { |vp| vp.opts[:ib] }
+  end
+
+  def add_extra_framework(framework)
+    framework_name   = framework.path.split('/').last
+    framework_group  = project.new_group(framework_name)
+    framework_group.path = File.join(project_path, framework.path)
+    framework_target = project.new_target(:framework, framework_name, platform)
+    Dir.glob("#{framework.path}/**/*.{h,m}") do |file|
+      file_ref = framework_group.new_file File.join(project_path, file)
+      framework_target.add_file_references([file_ref])
+    end
   end
 
   def ib_project_path
