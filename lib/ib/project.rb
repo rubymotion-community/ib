@@ -110,9 +110,7 @@ class IB::Project
       target.add_system_framework framework
     end
 
-    extra_frameworks.each do |framework|
-      add_extra_framework framework
-    end
+    extra_frameworks.each { |framework| add_extra_framework framework }
   end
 
   def extra_frameworks
@@ -120,8 +118,8 @@ class IB::Project
   end
 
   def add_extra_framework(framework)
-    framework_name   = framework.path.split('/').last
-    framework_group  = project.new_group(framework_name)
+    framework_name = framework.path.split('/').last
+    framework_group = project.new_group(framework_name)
     framework_group.path = File.join(project_path, framework.path)
     framework_target = project.new_target(:framework, framework_name, platform)
     Dir.glob("#{framework.path}/**/*.{h,m}") do |file|
