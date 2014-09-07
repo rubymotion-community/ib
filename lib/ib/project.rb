@@ -5,7 +5,9 @@ class IB::Project
 
   IB_PROJECT_NAME     = 'ib.xcodeproj'
   DEFAULT_FRAMEWORKS  = %W{QuartzCore CoreGraphics CoreData}
-  RESOURCE_EXTENSIONS = %W{xcdatamodeld png jpg jpeg storyboard xib lproj}
+  RESOURCE_EXTENSIONS = %W{
+    xcdatamodeld png jpg jpeg storyboard xib lproj ttf otf
+  }
 
   def initialize options={}
     @platform        = options[:platform]     || detect_platform
