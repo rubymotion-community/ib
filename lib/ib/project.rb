@@ -118,10 +118,13 @@ class IB::Project
   end
 
   def add_extra_framework(framework)
+    deployment_target = Motion::Project::App.config.deployment_target
     framework_name = framework.path.split('/').last
     framework_group = project.new_group(framework_name)
     framework_group.path = File.join(project_path, framework.path)
-    framework_target = project.new_target(:framework, framework_name, platform)
+    framework_target = project.new_target(
+      :framework, framework_name, platform, deployment_target)
+
     Dir.glob("#{framework.path}/**/*.{h,m}") do |file|
       file_ref = framework_group.new_file File.join(project_path, file)
       framework_target.add_file_references([file_ref])
