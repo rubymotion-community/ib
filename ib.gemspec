@@ -2,11 +2,11 @@
 require File.expand_path('../lib/ib/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Yury Korolev", "Francis Chong"]
-  gem.email         = ["yury.korolev@gmail.com", "francis@ignition.hk"]
+  gem.authors       = ["Yury Korolev", "Francis Chong", "Eloy Durán"]
+  gem.email         = ["yury.korolev@gmail.com", "francis@ignition.hk", "eloy@hipbyte.com"]
   gem.description   = %q{Magic rubymotion ib outlets support}
   gem.summary       = %q{Small portion of love to interface builder with rubymotion}
-  gem.homepage      = "https://github.com/yury/ib"
+  gem.homepage      = "https://github.com/rubymotion/ib"
   gem.licenses      = ['BSD']
 
   gem.files         = `git ls-files`.split($\).reject { |f| f =~ %r{samples/} }
