@@ -1,0 +1,36 @@
+GIT
+  remote: git://github.com/alloy/ib.git
+  revision: 2f7abbd3fdb3d187bce0d7ad8ac4974a27d1bf99
+  specs:
+    ib (0.6.0)
+      thor (~> 0.15.4)
+      tilt (~> 1.4.1)
+      xcodeproj (~> 0.17)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.1.8)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.1)
+      tzinfo (~> 1.1)
+    colored (1.2)
+    i18n (0.6.11)
+    json (1.8.1)
+    minitest (5.4.3)
+    thor (0.15.4)
+    thread_safe (0.3.4)
+    tilt (1.4.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    xcodeproj (0.20.2)
+      activesupport (>= 3)
+      colored (~> 1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ib!
