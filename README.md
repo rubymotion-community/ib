@@ -2,7 +2,6 @@
 
 RubyMotion Interface Builder support (yes, with outlets)
 
-<a href='http://spellhub.com/projects/project/7'><img src="http://spellhub.com/projects/status/7" height="18"></a>
 [![Build Status](https://travis-ci.org/rubymotion/ib.png?branch=master)](https://travis-ci.org/rubymotion/ib)
 
 [**Change Log**](https://github.com/rubymotion/ib/wiki/Change-Log)
@@ -20,8 +19,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install ib
-
-Or use RubyMotion [templates by @infiniteNIL](https://github.com/infiniteNIL/RubyMotionTemplates)
 
 In your Rake file:
 
@@ -47,6 +44,13 @@ Motion::Project::App.setup do |app|
 end
 
 ```
+
+## Upgrading to 0.7.0
+
+Previous versons of `ib` automatically registered the `rake ib:open` command,
+but offered no way to customize the `IB::Project` that was created.  As of
+0.7.0, you will need to create a `IB::RakeTask` instance in your Rakefile, then
+you can use `rake ib` as before.
 
 ## Usage
 
