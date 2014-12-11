@@ -38,6 +38,10 @@ Bundler.require
 require 'rubygems'
 require 'ib'
 
+IB::RakeTask.new do |project|
+  # ...
+end
+
 Motion::Project::App.setup do |app|
   # ...
 end
