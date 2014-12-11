@@ -13,6 +13,12 @@ class IB::Parser
   METHOD_DEF_REGEX = /^[ \t]+(def)[ \t]#{METHOD_ARGUMENT_REGEX}([ \t(]+)?#{METHOD_ARGUMENT_REGEX}?([ \t)]*)(#.*)?$/
   ACTION_REGEX = Regexp.union METHOD_DEF_REGEX, METHOD_REF_REGEX
 
+  def initialize(motion_template_type)
+    # NOTE: motion_template_type equal to Motion::Project::App.template
+    #       but, this class use its value for judging build platform.
+    @build_platform = motion_template_type
+  end
+
   def find_all(dir_or_files)
     all = {}
     files = case dir_or_files
@@ -53,6 +59,7 @@ class IB::Parser
       info[:actions] = find_actions(s)
 
       info[:path] = path
+      info[:build_platform] = @build_platform
 
       infos << IB::OCInterface.new(info)
     end

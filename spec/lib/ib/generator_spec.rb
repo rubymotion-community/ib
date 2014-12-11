@@ -4,7 +4,7 @@ require "ib/generator"
 
 describe IB::Generator do
   describe "generates stubs header with ios platform" do
-    files = IB::Parser.new.find_all("spec/fixtures/common")
+    files = IB::Parser.new(:ios).find_all("spec/fixtures/common")
     stubs = IB::Generator.new(:ios).render_stub_file('generator/templates/Stubs.h.erb', files)
 
     it 'should output valid values from IB::Generator::RenderingHelpers and template file' do
@@ -65,7 +65,7 @@ OBJC
   end
 
   describe "generates stubs header with osx platform" do
-    files = IB::Parser.new.find_all("spec/fixtures/common")
+    files = IB::Parser.new(:osx).find_all("spec/fixtures/common")
     stubs = IB::Generator.new(:osx).render_stub_file('generator/templates/Stubs.h.erb', files)
 
     it 'should output valid values from IB::Generator::RenderingHelpers and template file' do
@@ -77,7 +77,7 @@ OBJC
 #import <CoreData/CoreData.h>
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate: UIResponder <UIApplicationDelegate>
+@interface AppDelegate: NSObject <NSApplicationDelegate>
 
 @property IBOutlet UIWindow * window;
 @property IBOutlet UINavigationController * navigationController;
@@ -126,7 +126,7 @@ OBJC
   end
 
   describe "generates stubs implement" do
-    files = IB::Parser.new.find_all("spec/fixtures/common")
+    files = IB::Parser.new(:ios).find_all("spec/fixtures/common")
     stubs = IB::Generator.new(:ios).render_stub_file('generator/templates/Stubs.m.erb', files)
 
     it 'should output valid values from IB::Generator::RenderingHelpers and template file' do
@@ -163,7 +163,7 @@ OBJC
 
   describe "generates stubs header with ios platform of dependency_test fixtures" do
     it 'should output definitions which sorterd by its own dependencies' do
-      files = IB::Parser.new.find_all("spec/fixtures/dependency_test")
+      files = IB::Parser.new(:ios).find_all("spec/fixtures/dependency_test")
       stubs = IB::Generator.new(:ios).render_stub_file('generator/templates/Stubs.h.erb', files)
 
       stubs.should == <<-OBJC
@@ -212,7 +212,7 @@ OBJC
 
   describe "generates stubs header with ios platform of ProMotion's fixtures" do
     it 'should replace super_class from PM::* or ProMotion::* to UIViewController' do
-      files = IB::Parser.new.find_all("spec/fixtures/for_promotion")
+      files = IB::Parser.new(:ios).find_all("spec/fixtures/for_promotion")
       stubs = IB::Generator.new(:ios).render_stub_file('generator/templates/Stubs.h.erb', files)
 
       stubs.should == <<-OBJC

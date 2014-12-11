@@ -25,6 +25,7 @@ class IB::OCInterface
     @outlet_collections = create_instances(OutletCollection, params[:outlet_collections])
     @actions            = create_instances(Action, params[:actions])
     @path               = params[:path]
+    @build_platform     = params[:build_platform]
   end
 
   def [](key)
@@ -34,8 +35,8 @@ class IB::OCInterface
   def super_class
     # for support `ProMotion` gem https://github.com/yury/ib/pull/45
     return 'UIViewController' if @super_class =~ /^(?:PM::|ProMotion::)/
-    delegate_class = App.template == :ios ? 'UIApplicationDelegate' : 'NSApplicationDelegate'
-    responder_class = App.template == :ios ? 'UIResponder' : 'NSObject'
+    delegate_class = @build_platform == :ios ? 'UIApplicationDelegate' : 'NSApplicationDelegate'
+    responder_class = @build_platform == :ios ? 'UIResponder' : 'NSObject'
     @super_class ||
       ((@sub_class == 'AppDelegate') ? "#{responder_class} <#{delegate_class}>" : 'NSObject')
   end
