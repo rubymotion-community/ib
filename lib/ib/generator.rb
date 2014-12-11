@@ -20,7 +20,7 @@ class IB::Generator
   end
 
   def write files, dest
-    files = IB::Parser.new.find_all(files)
+    files = IB::Parser.new(@build_platform).find_all(files)
 
     FileUtils.mkpath dest
 

@@ -2,6 +2,8 @@
 class IB::Project
   attr_accessor :platform
   attr_accessor :project_path
+  attr_accessor :app_files
+  attr_accessor :resource_directories
 
   IB_PROJECT_NAME     = 'ib.xcodeproj'
   DEFAULT_FRAMEWORKS  = %W{QuartzCore CoreGraphics CoreData}
@@ -9,9 +11,28 @@ class IB::Project
     xcdatamodeld png jpg jpeg storyboard xib lproj ttf otf
   }
 
-  def initialize options={}
-    @platform        = options[:platform]     || detect_platform
-    @project_path    = options[:project_path] || Dir.pwd
+  def initialize(options={})
+    @platform     = options[:platform]
+    @project_path = options[:project_path] || Dir.pwd
+  end
+
+  def motion_config
+    Motion::Project::App.config
+  end
+  private :motion_config
+
+  def platform
+    @platform ||= motion_config.deploy_platform == 'MacOSX' ? :osx : :ios
+  end
+
+  def app_files
+    @app_files ||= motion_config.files.select do |file|
+      file =~ /^(\.\/)?app\//
+    end
+  end
+
+  def resource_directories
+    @resource_directories ||= motion_config.resources_dirs
   end
 
   # Writes a new ib.xcodeproj to the provided `#project_path`.
@@ -44,7 +65,7 @@ class IB::Project
   end
 
   def generator
-    @generator ||= IB::Generator.new(detect_platform)
+    @generator ||= IB::Generator.new(platform)
   end
 
   def resources
@@ -59,24 +80,7 @@ class IB::Project
     @pods ||= project.new_group("Pods")
   end
 
-  def detect_platform
-    # TODO: find a better way to detect platform
-    if defined?(Motion::Project::Config)
-      if Motion::Project::App.config.respond_to?(:platforms)
-        return Motion::Project::App.config.platforms[0] == 'MacOSX' ? :osx : :ios
-      end
-    end
-    return :ios
-  end
-
-  def app_files
-    Motion::Project::App.config.files.select do |file|
-      file =~ /^(\.\/)?app\//
-    end
-  end
-
   def setup_paths
-    resources.path     = File.join(project_path, 'resources')
     support_files.path = File.join(project_path, IB_PROJECT_NAME)
     pods.path          = File.join(project_path, 'vendor/Pods/Headers')
   end
@@ -90,14 +94,17 @@ class IB::Project
   end
 
   def add_resources
-    # First add reference to any asset catalogs.
-    Dir.glob("#{resources.path}/**/*.xcassets") do |file|
-      resources.new_reference(file)
-    end
-    # Add all other resources, ignoring files in existing asset catalogs
-    Dir["#{resources.path}/**/*.{#{RESOURCE_EXTENSIONS.join(",")}}"]
-      .reject {|f| f[%r{.*\.xcassets/.*}] }.each do |file|
-      resources.new_reference(file)
+    resource_directories.each do |dir|
+      group = resources.new_group(File.basename(dir), dir)
+      # First add reference to any asset catalogs.
+      Dir.glob(File.join(dir, "**/*.xcassets")) do |file|
+        group.new_reference(File.basename(file))
+      end
+      # Add all other resources, ignoring files in existing asset catalogs
+      Dir.glob(File.join(dir, "**/*.{#{RESOURCE_EXTENSIONS.join(",")}}"))
+        .reject {|f| f[%r{.*\.xcassets/.*}] }.each do |file|
+        group.new_reference(File.basename(file))
+      end
     end
   end
 

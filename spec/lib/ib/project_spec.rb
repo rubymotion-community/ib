@@ -3,6 +3,9 @@ require "spec_helper"
 require "ib/project"
 
 describe IB::Project do
+  after do
+    Motion::Project::App.config = nil
+  end
 
   context 'structure' do
     let(:project) { described_class.new(project_path: 'spec/fixtures/common')}
@@ -34,10 +37,6 @@ describe IB::Project do
 
     it "defines #pods" do
       expect(project).to respond_to :pods
-    end
-
-    it "defines #detect_platform" do
-      expect(project).to respond_to :detect_platform
     end
   end
 
@@ -82,9 +81,33 @@ describe IB::Project do
       expect(project.platform).to eq :ios
     end
 
+    it 'defaults to the application platform' do
+      Motion::Project::App.config = Motion::Project::Config.new(:ios)
+      project = described_class.new
+      expect(project.platform).to eq :ios
+      Motion::Project::App.config = Motion::Project::Config.new(:osx)
+      project = described_class.new
+      expect(project.platform).to eq :osx
+    end
+
     it 'can be set from parameter' do
       project = described_class.new platform: :osx
       expect(project.platform).to eq :osx
+    end
+  end
+
+  describe '#resource_directories' do
+    it 'defaults to "resources"' do
+      project = described_class.new
+      expect(project.resource_directories).to eq ['resources']
+    end
+
+    it 'defaults to the application directories' do
+      config = Motion::Project::Config.new
+      config.resources_dirs << 'other_resources'
+      Motion::Project::App.config = config
+      project = described_class.new
+      expect(project.resource_directories).to eq ['resources', 'other_resources']
     end
   end
 

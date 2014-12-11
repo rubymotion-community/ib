@@ -6,16 +6,29 @@
 require 'ib'
 
 module Motion
-  class Config
-    def self.files
-      []
-    end
-  end
-
   module Project
+    class Config
+      attr_reader :files
+      attr_reader :resources_dirs
+
+      def initialize(platform = :ios)
+        @platform = platform
+        @files = []
+        @resources_dirs = ['resources']
+      end
+
+      def deploy_platform
+        @platform == :ios ? 'iPhoneOS' : 'MacOSX'
+      end
+    end
+
     class App
-      def self.config
-        Motion::Config
+      class << self
+        attr_writer :config
+
+        def config
+          @config ||= Config.new
+        end
       end
     end
   end
