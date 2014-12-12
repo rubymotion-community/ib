@@ -22,7 +22,6 @@ module IB
 
     def define_tasks
       namespace :ib do
-        desc "Generates ib.xcodeproj"
         task :project do
           @project.write
         end
@@ -43,7 +42,7 @@ namespace :ib do
     system "open ib.xcodeproj"
   end
 
-  # if this task is invoked
+  desc "Generates ib.xcodeproj"
   task :project do
     if ! IB::RakeTask.created?
       puts "You haven't created an instance of IB::RakeTask in your Rakefile"
