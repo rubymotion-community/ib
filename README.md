@@ -35,22 +35,23 @@ Bundler.require
 require 'rubygems'
 require 'ib'
 
-IB::RakeTask.new do |project|
-  # ...
-end
-
 Motion::Project::App.setup do |app|
   # ...
 end
 
 ```
 
-## Upgrading to 0.7.0
+## Customizing `IB::Project`
 
-Previous versons of `ib` automatically registered the `rake ib:open` command,
-but offered no way to customize the `IB::Project` that was created.  As of
-0.7.0, you will need to create a `IB::RakeTask` instance in your Rakefile, then
-you can use `rake ib` as before.
+If you want to customize the `IB::Project` instance that creates `ib.xcodeproj`, you
+should create an instance of `IB::RakeTask` and pass it a block.  That block will be handed
+an instance of `IB::Project` that you can modify:
+
+###### Rakefile
+```ruby
+IB::RakeTask.new do |project|
+end
+```
 
 ## Usage
 
