@@ -103,7 +103,7 @@ class IB::Project
       # Add all other resources, ignoring files in existing asset catalogs
       Dir.glob(File.join(dir, "**/*.{#{RESOURCE_EXTENSIONS.join(",")}}"))
         .reject {|f| f[%r{.*\.xcassets/.*}] }.each do |file|
-        group.new_reference(File.basename(file))
+        group.new_reference(file.sub(dir + '/', ''))
       end
     end
   end
