@@ -13,7 +13,15 @@ class IB::OCInterface
 
   class Action < Struct.new(:variable, :arg, :return_type)
     def to_declare
-      arg ? "#{variable}:(#{return_type ? "#{return_type}*" : 'id'}) #{arg}" : "#{variable}"
+      if arg
+        if arg =~ /story_?board/i
+          "#{variable}:(UIStoryBoard *) #{arg}"
+        else
+          "#{variable}:(#{return_type ? "#{return_type}*" : 'id'}) #{arg}"
+        end
+      else
+        "#{variable}"
+      end
     end
   end
 

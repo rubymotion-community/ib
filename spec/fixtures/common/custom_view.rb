@@ -33,6 +33,9 @@ class CustomView < UIView
   def actionWithoutArgs
   end
 
+  def exitAction(story_board)
+  end
+
   def actionWithDefaultedArgs(sender = nil) #comment
   end
 
