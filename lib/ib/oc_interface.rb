@@ -15,7 +15,7 @@ class IB::OCInterface
     def to_declare
       if arg
         if arg =~ /story_?board/i
-          "#{variable}:(UIStoryBoard *) #{arg}"
+          "#{variable}:(UIStoryboard *) #{arg}"
         else
           "#{variable}:(#{return_type ? "#{return_type}*" : 'id'}) #{arg}"
         end
