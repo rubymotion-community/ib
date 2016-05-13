@@ -47,7 +47,7 @@ describe IB::Generator do
 -(IBAction) actionWithComment:(id) sender;
 -(IBAction) actionWithBrackets:(id) sender;
 -(IBAction) actionWithoutArgs;
--(IBAction) exitAction:(UIStoryBoard *) story_board;
+-(IBAction) exitAction:(UIStoryboard *) story_board;
 -(IBAction) actionWithDefaultedArgs:(id) sender;
 
 @end
@@ -109,7 +109,7 @@ OBJC
 -(IBAction) actionWithComment:(id) sender;
 -(IBAction) actionWithBrackets:(id) sender;
 -(IBAction) actionWithoutArgs;
--(IBAction) exitAction:(UIStoryBoard *) story_board;
+-(IBAction) exitAction:(UIStoryboard *) story_board;
 -(IBAction) actionWithDefaultedArgs:(id) sender;
 
 @end
