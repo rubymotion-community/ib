@@ -26,6 +26,9 @@ module IB
           Motion::Project::App.config.frameworks.each do |framework|
             headers << "\#import <#{framework}/#{framework}.h>\n"
           end
+          Dir.glob("vendor/Pods/Headers/*/*.h").each do |pod|
+            headers << "\#import \"#{File.basename(pod)}\"\n"
+          end
         else
           headers << "#import <Foundation/Foundation.h>\n"
           headers << "#import <CoreData/CoreData.h>\n"
